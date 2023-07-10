@@ -1,12 +1,18 @@
 {
     "label" : {
+        "first_name": "First name",
+        "last_name": "Last name",
         "email": "Email",
         "password": "Password",
+        "confirm_password": "Confirm password",
         "keep_login": "Keep login",
         "sign_in_with_email": "Sign in with email",
-        "forgot_password": "Forgot password?"
+        "sign_up_with_email": "Sign up with email",
+        "forgot_password": "Forgot password?",
+        "do_you_have_account": "Do you have account?"
     },
     "button": {
-        "sign_in": "Sign in"
+        "sign_in": "Sign in",
+        "sign_up": "Sign up"
     }
 }

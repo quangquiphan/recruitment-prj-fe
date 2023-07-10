@@ -17,7 +17,7 @@ const AppConstant = Object.freeze({
         COLOR_RGB_PATTERN: /^RGB\(\s*(?:(\d{1,3})\s*,?){3}\)$/,
         SPECIAL_CHARS_NOT_ALLOW_RENAME:
           /^((?!\\|\/|:|\*|\?|"|<|>|\||\{|})[\s\S])*?$/,
-        PASSWORD: /^(?=.*[a-z])(?=.*[0-9]).{8,}$/, // at least 8 characters, including numbers and characters
+        PASSWORD: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]).{8,}$/, // at least 8 characters, including numbers and characters
         AT_LEAST_ONE_LOWER_CHARACTER: /^(?=.*[a-z]).+$/,
         AT_LEAST_ONE_UPPERCASE_CHARACTER: /^(?=.*[A-Z]).+$/,
         AT_LEAST_ONE_NUMBER_CHARACTER: /^(?=.*\d).+$/,

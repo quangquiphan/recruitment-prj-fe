@@ -1,4 +1,4 @@
-.sign-in {
+.sign-up {
     height: 100vh;
 
     img {
@@ -12,24 +12,20 @@
         justify-content: center;
         border-top: 1px solid var(--primary-500);
     }
-}
 
-.font-color-primary {
-    color: var(--primary-700);
-}
-
-.forgot-pwd {
-    position: absolute;
-    right: 0;
-    text-decoration: none;
+    .fl-name {
+        div {
+            width: 48%;
+        }
+    }
 }
 
 .margin-bottom-10 {
     margin-bottom: 10px !important;
 }
 
-#keepLogin {
-    margin-right: 5px;
+.font-color-primary {
+    color: var(--primary-700);
 }
 
 form {
@@ -42,7 +38,7 @@ form {
 }
 
 :host::ng-deep {
-    #pwd {
+    #pwd, #confirm-pwd {
         .p-password, .p-inputtext {
             width: 100%;
         }

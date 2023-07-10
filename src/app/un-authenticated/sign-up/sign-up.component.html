@@ -1,0 +1,57 @@
+<div class="w-full flex flex-column justify-content-center align-items-center sign-up">
+    <img src="../../../assets/images/TopWork-logo.png" alt="TopWork" width="130px">
+    
+    <form [formGroup]="signUpForm">
+        <div class="w-full flex margin-bottom-10 justify-content-between fl-name">
+            <div class="flex flex-column">
+                <label for="first-name" class="font-size-14 font-bold font-color-primary" 
+                    style="margin-bottom: 2px;">
+                    {{ 'label.first_name' | translate }}
+                </label>
+                <input pInputText formControlName="firstName" id="first-name">
+            </div>
+
+            <div class="flex flex-column">
+                <label for="last-name" class="font-size-14 font-bold font-color-primary" 
+                    style="margin-bottom: 2px;">
+                    {{ 'label.last_name' | translate }}
+                </label>
+                <input pInputText formControlName="lastName" id="last-name">
+            </div>
+        </div>
+
+        <div class="flex flex-column margin-bottom-10">
+            <label for="email" class="font-size-14 font-bold font-color-primary" 
+                style="margin-bottom: 2px;">
+                {{ 'label.email' | translate }}
+            </label>
+            <input pInputText formControlName="email" id="email">
+        </div>
+
+        <div class="flex flex-column w-full margin-bottom-10 relative">
+            <label for="pwd" class="font-size-14 font-bold font-color-primary" 
+                style="margin-bottom: 2px;">
+                {{ 'label.password' | translate }}
+            </label>
+            <p-password id="pwd" formControlName="passwordHash" class="w-full"></p-password>
+        </div>
+
+        <div class="flex flex-column w-full"
+             style="margin-bottom: 25px;">
+            <label for="confirm-pwd" class="font-size-14 font-bold font-color-primary" 
+                style="margin-bottom: 2px;">
+                {{ 'label.confirm_password' | translate }}
+            </label>
+            <p-password id="confirm-pwd" formControlName="confirmPassword" class="w-full"></p-password>
+        </div>
+
+        <div class="flex justify-content-center">
+            <p-button (onClick)="onSignUp()" [label]="'button.sign_up' | translate"></p-button>
+        </div>
+    </form>
+
+    <div class="font-size-13 font-color-primary">
+      {{ 'label.do_you_have_account' | translate }}&nbsp;
+      <a [routerLink]="'/sign-in'" class="font-italic">{{ 'button.sign_in' | translate}}</a>  
+    </div>
+</div>
