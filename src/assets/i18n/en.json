@@ -13,6 +13,7 @@
     },
     "button": {
         "sign_in": "Sign in",
-        "sign_up": "Sign up"
+        "sign_up": "Sign up",
+        "submit": "Submit"
     }
 }

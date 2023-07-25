@@ -2,51 +2,77 @@
     <img src="../../../assets/images/TopWork-logo.png" alt="TopWork" width="130px">
     
     <form [formGroup]="signUpForm">
-        <div class="w-full flex margin-bottom-10 justify-content-between fl-name">
-            <div class="flex flex-column">
-                <label for="first-name" class="font-size-14 font-bold font-color-primary" 
-                    style="margin-bottom: 2px;">
-                    {{ 'label.first_name' | translate }}
-                </label>
-                <input pInputText formControlName="firstName" id="first-name">
-            </div>
-
-            <div class="flex flex-column">
-                <label for="last-name" class="font-size-14 font-bold font-color-primary" 
-                    style="margin-bottom: 2px;">
-                    {{ 'label.last_name' | translate }}
-                </label>
-                <input pInputText formControlName="lastName" id="last-name">
-            </div>
-        </div>
-
-        <div class="flex flex-column margin-bottom-10">
-            <label for="email" class="font-size-14 font-bold font-color-primary" 
+        <div *ngIf="isNext">
+            <div class="flex flex-column margin-bottom-10">
+                <label for="email" class="font-size-14 font-bold font-color-primary" 
                 style="margin-bottom: 2px;">
                 {{ 'label.email' | translate }}
-            </label>
-            <input pInputText formControlName="email" id="email">
+                </label>
+                <input pInputText formControlName="email" id="email">
+            </div>
+    
+            <div class="flex flex-column w-full margin-bottom-10 relative">
+                <label for="pwd" class="font-size-14 font-bold font-color-primary" 
+                    style="margin-bottom: 2px;">
+                    {{ 'label.password' | translate }}
+                </label>
+                <p-password id="pwd" formControlName="passwordHash" class="w-full" [toggleMask]="true"></p-password>
+            </div>
+    
+            <div class="flex flex-column w-full"
+                 style="margin-bottom: 25px;">
+                <label for="confirm-pwd" class="font-size-14 font-bold font-color-primary" 
+                    style="margin-bottom: 2px;">
+                    {{ 'label.confirm_password' | translate }}
+                </label>
+                <p-password id="confirm-pwd" formControlName="confirmPassword" class="w-full" [toggleMask]="true"></p-password>
+            </div>
         </div>
 
-        <div class="flex flex-column w-full margin-bottom-10 relative">
-            <label for="pwd" class="font-size-14 font-bold font-color-primary" 
-                style="margin-bottom: 2px;">
-                {{ 'label.password' | translate }}
-            </label>
-            <p-password id="pwd" formControlName="passwordHash" class="w-full"></p-password>
-        </div>
+        <div *ngIf="!isNext">
+            <div class="w-full flex margin-bottom-10 justify-content-between fl-name">
+                <div class="flex flex-column">
+                    <label for="first-name" class="font-size-14 font-bold font-color-primary" 
+                        style="margin-bottom: 2px;">
+                        {{ 'label.first_name' | translate }}
+                    </label>
+                    <input pInputText formControlName="firstName" id="first-name">
+                </div>
+    
+                <div class="flex flex-column">
+                    <label for="last-name" class="font-size-14 font-bold font-color-primary" 
+                        style="margin-bottom: 2px;">
+                        {{ 'label.last_name' | translate }}
+                    </label>
+                    <input pInputText formControlName="lastName" id="last-name">
+                </div>
+            </div>
 
-        <div class="flex flex-column w-full"
-             style="margin-bottom: 25px;">
-            <label for="confirm-pwd" class="font-size-14 font-bold font-color-primary" 
+            <div class="flex flex-column margin-bottom-10">
+                <label for="phone" class="font-size-14 font-bold font-color-primary" 
                 style="margin-bottom: 2px;">
-                {{ 'label.confirm_password' | translate }}
-            </label>
-            <p-password id="confirm-pwd" formControlName="confirmPassword" class="w-full"></p-password>
+                {{ 'label.phone_number' | translate }}
+                </label>
+                <input pInputText formControlName="phoneNumber" id="phone">
+            </div>
+
+            <div class="flex flex-column w-full" style="margin-bottom: 25px;">
+                <label for="dropdown" class="font-size-14 font-bold font-color-primary" 
+                style="margin-bottom: 2px;">
+                {{ 'label.phone_number' | translate }}
+                </label>
+                <p-dropdown inputId="dropdown" [options]="majors" class="w-full"
+                    [appendTo]="'body'" [optionLabel]="'name'" [optionValue]="'id'"></p-dropdown>
+            </div>
         </div>
 
         <div class="flex justify-content-center">
-            <p-button (onClick)="onSignUp()" [label]="'button.sign_up' | translate"></p-button>
+            <p-button (onClick)="isNext=false" *ngIf="isNext" 
+                [disabled]="!signUpForm.value.email || !signUpForm.value.passwordHash || 
+                    !signUpForm.value.confirmPassword"
+                [label]="'next'"></p-button>
+            <p-button (onClick)="onSignUp()" *ngIf="!isNext"
+                [label]="'button.sign_up' | translate"></p-button>
         </div>
     </form>
 

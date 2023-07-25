@@ -7,12 +7,18 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { TranslateModule } from "@ngx-translate/core";
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
     declarations: [
         UnAuthenticatedComponent,
         SignInComponent,
-        SignUpComponent
+        SignUpComponent,
+        VerifyEmailComponent,
+        ForgotPasswordComponent,
+        ResetPasswordComponent
     ],
 
     imports: [

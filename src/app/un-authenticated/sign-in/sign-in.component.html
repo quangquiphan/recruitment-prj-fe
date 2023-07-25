@@ -13,9 +13,9 @@
             <label for="pwd" class="font-size-14 font-bold font-color-primary" style="margin-bottom: 2px;">
                 {{ 'label.password' | translate }}
             </label>
-            <p-password id="pwd" formControlName="passwordHash" class="w-full"></p-password>
+            <p-password id="pwd" formControlName="passwordHash" [toggleMask]="true" class="w-full"></p-password>
 
-            <a class="font-size-13 forgot-pwd cursor-pointer" href="#">
+            <a class="font-size-13 forgot-pwd cursor-pointer" [routerLink]="'/forgot-password'">
                 {{ 'label.forgot_password' | translate }}
             </a>
         </div>

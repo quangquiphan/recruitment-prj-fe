@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import AppConstant from 'src/app/utilities/app-constant';
+import AppData from 'src/app/utilities/app-data';
 import AppUtil from 'src/app/utilities/app-util';
 
 @Component({
@@ -10,6 +11,9 @@ import AppUtil from 'src/app/utilities/app-util';
 })
 export class SignUpComponent implements OnInit{
   signUpForm: FormGroup = new FormGroup({});
+  isNext: boolean = true;
+  disable: boolean = true;
+  majors: any[] = AppData.getMajor();
 
   constructor(
     private fb: FormBuilder
@@ -17,6 +21,8 @@ export class SignUpComponent implements OnInit{
     this.signUpForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      phoneNumber: ['', Validators.pattern(AppConstant.PATTERNS.PHONE)],
+      major: [''],
       email: ['', Validators.pattern(AppConstant.PATTERNS.EMAIL)],
       passwordHash: ['', Validators.pattern(AppConstant.PATTERNS.PASSWORD)],
       confirmPassword: ['', Validators.pattern(AppConstant.PATTERNS.PASSWORD)]
@@ -38,4 +44,13 @@ export class SignUpComponent implements OnInit{
     }
   }
 
+  nextTep() {
+    if (!this.signUpForm.value.email && 
+        !this.signUpForm.value.passwordHash && 
+        !this.signUpForm.value.confirmPassword) {
+      return this.isNext = true;
+    }
+
+    return this.isNext = false;
+  }
 }
