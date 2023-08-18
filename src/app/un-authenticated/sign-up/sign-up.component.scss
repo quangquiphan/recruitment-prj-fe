@@ -43,4 +43,10 @@ form {
             width: 100%;
         }
     }
+
+    form {
+        .p-button {
+            width: 180px !important;
+        }
+    }
 }

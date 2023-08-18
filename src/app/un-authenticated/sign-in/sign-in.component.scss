@@ -1,17 +1,19 @@
 .sign-in {
-    height: 100vh;
 
     img {
         margin-bottom: 30px;
     }
 
     &>div {
-        width: 350px;
         padding-top: 20px;
         display: flex;
         justify-content: center;
         border-top: 1px solid var(--primary-500);
     }
+}
+
+.mobile {
+    min-width: 312px !important;
 }
 
 .font-color-primary {
@@ -33,12 +35,13 @@
 }
 
 form {
-    width: 412px;
+    min-width: 412px;
     padding: 50px 30px;
     border-radius: 6px;
     background-color: var(--primary-100);
     border: 1px solid var(--primary-400);
     margin-bottom: 30px;
+    
 }
 
 :host::ng-deep {
@@ -50,5 +53,11 @@ form {
 
     .p-icon {
         color: var(--primary-700) !important;
+    }
+
+    form {
+        .p-button {
+            width: 180px !important;
+        }
     }
 }

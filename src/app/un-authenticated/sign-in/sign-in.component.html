@@ -1,7 +1,7 @@
 <div class="w-full flex flex-column justify-content-center align-items-center sign-in">
     <img src="../../../assets/images/TopWork-logo.png" alt="TopWork" width="130px">
 
-    <form [formGroup]="signInForm">
+    <form [formGroup]="signInForm" [ngClass]="isMobile?'mobile':''">
         <div class="flex flex-column margin-bottom-10">
             <label for="email" class="font-size-14 font-bold font-color-primary" style="margin-bottom: 2px;">
                 {{ 'label.email' | translate }}
@@ -23,7 +23,8 @@
         <div class="w-full flex justify-content-between align-items-end"
              style="margin-bottom: 25px;">
             <div class="flex align-items-end">
-                <p-checkbox formControlName="keepLogin" [value]="true" id="keepLogin"></p-checkbox>
+                <p-checkbox formControlName="keepLogin" [binary]="true" inputId="keepLogin"
+                    id="keepLogin"></p-checkbox>
                 <label for="keepLogin" class="font-size-14 font-color-primary">
                     {{ 'label.keep_login' | translate }}
                 </label>
@@ -31,11 +32,12 @@
         </div>
 
         <div class="flex justify-content-center">
-            <p-button (onClick)="onSignIn()" [label]="'button.sign_in' | translate"></p-button>
+            <p-button (onClick)="onSignIn()" [label]="'button.sign_in' | translate"
+                [disabled]="signInForm.invalid || disable"></p-button>
         </div>
     </form>
 
-    <div class="font-color-primary font-size-13">
+    <div class="font-color-primary font-size-13" [style]="isMobile ? {'width': '312px'} : {'width': '350px'}">
       {{ 'label.do_you_have_account' | translate }}&nbsp;
       <a [routerLink]="'/sign-up'" class="font-color-primary font-italic">{{ 'button.sign_up' | translate}}</a>  
     </div>

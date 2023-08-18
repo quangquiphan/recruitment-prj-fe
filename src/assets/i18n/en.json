@@ -9,11 +9,83 @@
         "sign_in_with_email": "Sign in with email",
         "sign_up_with_email": "Sign up with email",
         "forgot_password": "Forgot password?",
-        "do_you_have_account": "Do you have account?"
+        "do_you_have_account": "Do you have account?",
+        "phone_number": "Phone number",
+        "major": "Major",
+        "jobs": "Jobs",
+        "company": "Company",
+        "profile": "Profile",
+        "change_password": "Change password",
+        "upload_cv": "Upload CV",
+        "chose_language_display": "Choose language display",
+        "english": "English",
+        "vietnamese": "Vietnamese",
+        "powered_by_quang_qui": "Powered by Quang Qúi",
+        "sign_in": "Sign in"
+    },
+    "message": {
+        "sign_up_successfully": "Sign up successfully!",
+        "sign_up_failed": "Sign up failed!",
+        "verify_email_successfully": "Verify email successfully!",
+        "check_your_email": "Check your email",
+        "reset_password_successfully": "Reset password successfully!",
+        "select_major": "Select major"
     },
     "button": {
         "sign_in": "Sign in",
         "sign_up": "Sign up",
-        "submit": "Submit"
+        "sign_out": "Sign out",
+        "save": "Save",
+        "cancel": "Cancel",
+        "edit": "Edit",
+        "delete": "Delete",
+        "submit": "Submit",
+        "new": "New"
+    },
+    "SIZE": {
+        "FORM_11_TO_25": "11 - 25",
+        "FORM_26_TO_50": "26 - 50",
+        "FORM_51_TO_100": "51 - 100",
+        "FORM_101_TO_1000": "101 - 1000",
+        "OVER_1000": "> 1000"
+    },
+    "YEAR_EXPERIENCE": {
+        "NON_EXPERIENCE": "0", 
+        "UNDER_1_YEAR": "0 - 1", 
+        "ONE_YEAR": "1", 
+        "TWO_YEAR": "2", 
+        "THREE_YEAR": "3", 
+        "FOUR_YEAR": "4", 
+        "FIVE_YEAR": "5", 
+        "OVER_FIVE_YEAR": "5+"
+    },
+    "major": {
+        "it": "IT",
+        "hr": "Human resource",
+        "law": "Law",
+        "accountant": "Accountant",
+        "sale": "Sale",
+        "qa_qc": "QA/QC",
+        "education": "Education",
+        "orther": "Orther"
+    },
+    "role": {
+        "COMPANY_ADMIN": "Admin",
+        "COMPANY_MEMBER": "Member",
+        "COMPANY_ADMIN_MEMBER": "Admin"
+    },
+    "salary": {
+        "UNDER_3": "Under 3 million VND",
+        "FROM_3_TO_5": "3 - 5 million VND",
+        "FROM_5_TO_10": "5 - 10 million VND",
+        "FROM_10_TO_18": "10 - 18 million VND",
+        "FROM_18_TO_25": "18 - 25 million VND",
+        "FROM_25_TO_50": "25 - 50 million VND",
+        "OVER_50": "50+ million VND",
+        "EXPECTED": "Expected"
+    },
+    "gender": {
+        "FE_MALE": "Fe male",
+        "MALE": "Male"
     }
 }

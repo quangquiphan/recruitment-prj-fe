@@ -35,6 +35,9 @@ import { MultiSelectModule } from "primeng/multiselect";
 import { ChartModule } from "primeng/chart";
 import { MenuModule } from 'primeng/menu';
 import { TabViewModule } from 'primeng/tabview';
+import { ChipModule } from "primeng/chip";
+import { SidebarModule } from "primeng/sidebar";
+import { RadioButtonModule } from "primeng/radiobutton";
 
 @NgModule({
   declarations: [],
@@ -74,7 +77,10 @@ import { TabViewModule } from 'primeng/tabview';
     MultiSelectModule,
     ChartModule,
     MenuModule,
-    TabViewModule
+    TabViewModule,
+    ChipModule,
+    SidebarModule,
+    RadioButtonModule,
   ],
   exports: [
     AccordionModule,
@@ -111,7 +117,10 @@ import { TabViewModule } from 'primeng/tabview';
     MultiSelectModule,
     ChartModule,
     MenuModule,
-    TabViewModule
+    TabViewModule,
+    ChipModule,
+    SidebarModule,
+    RadioButtonModule,
   ]
 })
 export class PrimeNgModule { }

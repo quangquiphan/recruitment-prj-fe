@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
+import { UserService } from 'src/app/services/user.service';
 import AppConstant from 'src/app/utilities/app-constant';
 import AppData from 'src/app/utilities/app-data';
 import AppUtil from 'src/app/utilities/app-util';
@@ -10,23 +14,42 @@ import AppUtil from 'src/app/utilities/app-util';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit{
+  @Output() isClose: EventEmitter<Boolean> = new EventEmitter();
   signUpForm: FormGroup = new FormGroup({});
   isNext: boolean = true;
-  disable: boolean = true;
-  majors: any[] = AppData.getMajor();
+  disable: boolean = false;
+  majors: any[] = [];
 
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private _router: Router,
+    private userService: UserService,
+    private messageService: MessageService,
+    private translateService: TranslateService
   ) {
     this.signUpForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phoneNumber: ['', Validators.pattern(AppConstant.PATTERNS.PHONE)],
-      major: [''],
-      email: ['', Validators.pattern(AppConstant.PATTERNS.EMAIL)],
-      passwordHash: ['', Validators.pattern(AppConstant.PATTERNS.PASSWORD)],
-      confirmPassword: ['', Validators.pattern(AppConstant.PATTERNS.PASSWORD)]
+      phoneNumber: ['', [
+        Validators.required,
+        Validators.pattern(AppConstant.PATTERNS.PHONE)
+      ]],
+      major: ['', Validators.required],
+      email: ['', [
+        Validators.required,
+        Validators.pattern(AppConstant.PATTERNS.EMAIL)
+      ]],
+      passwordHash: ['', [
+        Validators.required,
+        Validators.pattern(AppConstant.PATTERNS.PASSWORD)
+      ]],
+      confirmPassword: ['', [
+        Validators.required,
+        Validators.pattern(AppConstant.PATTERNS.PASSWORD)
+      ]],
+      role: [AppConstant.USER_ROLE.USER]
     });
+    this.majors = AppData.getMajor(this.translateService);
   }
 
   ngOnInit(): void {
@@ -40,8 +63,28 @@ export class SignUpComponent implements OnInit{
       email: this.signUpForm.value.email,
       passwordHash: AppUtil.hasMD5(this.signUpForm.value.passwordHash).toString(),
       confirmPassword: AppUtil.hasMD5(this.signUpForm.value.confirmPassword).toString(),
-      role: "USER"
+      role: this.signUpForm.value.role,
+      major: this.signUpForm.value.major,
+      phoneNumber: this.signUpForm.value.phoneNumber
     }
+
+    this.disable = true;
+    return this.userService.signUp(AppUtil.toSnakeCaseKey(params)).subscribe(
+      res => {
+        if (res.status === 200) {
+          this.isClose.emit(true);
+          this._router.navigate(['/check-your-email']);
+          this.signUpForm.reset();
+          AppUtil.getMessageSuccessfully(this.messageService, this.translateService, 
+            "message.sign_up_successfully");
+          this.disable = false;
+        } else {
+          AppUtil.getMessageFailed(this.messageService, this.translateService, 
+            "message.sign_up_failed");
+          this.disable = false;
+        }
+      }
+    )
   }
 
   nextTep() {

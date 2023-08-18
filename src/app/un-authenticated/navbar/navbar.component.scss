@@ -1,0 +1,82 @@
+.nav {
+    max-width: 1400px;
+    min-width: 801px;
+
+    .logo {
+        margin-right: 50px;
+    }
+
+    ul {
+        li.item {
+            padding: 10px 20px;
+        } 
+    }
+
+    .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid var(--primary-700);
+    }
+}
+
+@media screen and (max-width: 800px) and (min-width: 300px) {
+    .nav-mobile {
+        width: 100vw;
+    
+        .menu-bar {
+            width: 80%;
+        }
+    }
+}
+
+:host::ng-deep {
+    .menu-bar ul li {
+        padding: 10px 20px;
+    }
+
+    .menu-bar {
+        .avatar-mobile {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-700);
+            margin-right: 20px;
+        }
+
+        .img {
+            transform: rotateX(180deg);
+        }
+
+        .p-dropdown {
+            border: unset !important;
+            border-bottom: 2px solid var(--blue-700) !important;
+            border-radius: 0 !important;
+        }
+
+        .p-dropdown:focus-visible {
+            outline: unset !important;
+        }
+
+        .p-dropdown.p-focus {
+            box-shadow: none !important;
+        }
+    }
+
+    .p-dialog {
+        max-height: fit-content !important;
+    }
+
+    .p-menu {
+        width: 14.5rem !important;
+    }
+
+    .p-menu .p-menuitem-link {
+        align-items: end !important;
+        justify-content: flex-start;
+    }
+
+    .p-menu .p-menuitem-link .p-menuitem-icon {
+        margin-right: 1.25rem !important;
+    }
+}

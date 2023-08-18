@@ -59,10 +59,11 @@
             <div class="flex flex-column w-full" style="margin-bottom: 25px;">
                 <label for="dropdown" class="font-size-14 font-bold font-color-primary" 
                 style="margin-bottom: 2px;">
-                {{ 'label.phone_number' | translate }}
+                {{ 'label.major' | translate }}
                 </label>
                 <p-dropdown inputId="dropdown" [options]="majors" class="w-full"
-                    [appendTo]="'body'" [optionLabel]="'name'" [optionValue]="'id'"></p-dropdown>
+                    [appendTo]="'body'" [optionLabel]="'label'" formControlName="major" [optionValue]="'id'"
+                    [placeholder]="'message.select_major' | translate"></p-dropdown>
             </div>
         </div>
 
@@ -71,7 +72,7 @@
                 [disabled]="!signUpForm.value.email || !signUpForm.value.passwordHash || 
                     !signUpForm.value.confirmPassword"
                 [label]="'next'"></p-button>
-            <p-button (onClick)="onSignUp()" *ngIf="!isNext"
+            <p-button (onClick)="onSignUp()" *ngIf="!isNext" [disabled]="signUpForm.invalid || disable"
                 [label]="'button.sign_up' | translate"></p-button>
         </div>
     </form>

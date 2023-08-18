@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import * as CryptoJs from 'crypto-js';
 import { MessageService } from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core'
 
 const AppUtil = {
     toast(
@@ -47,9 +48,28 @@ const AppUtil = {
 
         return obj;       
     },
+
     hasMD5(text: string | CryptoJs.lib.WordArray): string {
         return CryptoJs.MD5(text).toString();
-    }
+    },
+
+    getMessageSuccessfully(messageService: MessageService, translateService: TranslateService, message: string) {
+        return messageService.add({
+            key: 'app-toast',
+            severity: 'success',
+            summary: 'Successfully!',
+            detail: translateService.instant(message)
+        })
+    },
+
+    getMessageFailed(messageService: MessageService, translateService: TranslateService, message: string) {
+        return messageService.add({
+            key: 'app-toast',
+            severity: 'error',
+            summary: 'Failed!',
+            detail: translateService.instant(message)
+        })
+    },
 }
 
 export default AppUtil;
