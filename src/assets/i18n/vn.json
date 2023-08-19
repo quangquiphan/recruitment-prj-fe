@@ -1,0 +1,84 @@
+{
+    "label" : {
+        "first_name": "Tên",
+        "last_name": "Họ",
+        "email": "Email",
+        "password": "Mật khẩu",
+        "confirm_password": "Nhập lại mật khẩu",
+        "keep_login": "Keep login",
+        "sign_in_with_email": "Đăng nhập bằng email",
+        "sign_up_with_email": "Đăng ký bằng email",
+        "forgot_password": "Quên mật khẩu?",
+        "do_you_have_account": "Bạn đã có tài khoản chưa?",
+        "phone_number": "Số điện thoại",
+        "major": "Nghề/Chuyên ngành",
+        "jobs": "Việc làm",
+        "company": "Công ty",
+        "profile": "Hồ sơ",
+        "change_password": "Đổi mật khẩu",
+        "upload_cv": "Upload CV",
+        "english": "Tiếng Anh",
+        "vietnamese": "Tiếng Việt",
+        "powered_by_quang_qui": "© {{year}} <b>Bản quyền</b> thuộc Quang Quí",
+        "old_password": "Mật khẩu củ",
+        "new_password": "Mật khẩu mới",
+        "confirm_new_password": "Nhập lại mật khẩu"
+    },
+    "button": {
+        "sign_in": "Đăng nhập",
+        "sign_up": "Đăng ký",
+        "sign_out": "Đăng xuất",
+        "save": "Lưu",
+        "cancel": "Bỏ qua",
+        "edit": "Sửa",
+        "delete": "Xoá",
+        "submit": "Đăng",
+        "new": "Thêm mới"
+    },
+    "SIZE": {
+        "FORM_11_TO_25": "11 - 25",
+        "FORM_26_TO_50": "26 - 50",
+        "FORM_51_TO_100": "51 - 100",
+        "FORM_101_TO_1000": "101 - 1000",
+        "OVER_1000": "> 1000"
+    },
+    "YEAR_EXPERIENCE": {
+        "NON_EXPERIENCE": "0", 
+        "UNDER_1_YEAR": "0 - 1", 
+        "ONE_YEAR": "1", 
+        "TWO_YEAR": "2", 
+        "THREE_YEAR": "3", 
+        "FOUR_YEAR": "4", 
+        "FIVE_YEAR": "5", 
+        "OVER_FIVE_YEAR": "5+"
+    },
+    "major": {
+        "it": "Công Nghệ Thông Tin",
+        "hr": "Quản lý nhân sự",
+        "law": "Luật",
+        "accountant": "Kế toán",
+        "sale": "Bán hàng",
+        "qa_qc": "QA/QC",
+        "education": "Giáo dục",
+        "orther": "Khác"
+    },
+    "role": {
+        "COMPANY_ADMIN": "Quản trị viên",
+        "COMPANY_MEMBER": "Thành viên",
+        "COMPANY_ADMIN_MEMBER": "Quản trị viên"
+    },
+    "salary": {
+        "UNDER_3": "Under 3 triệu VND",
+        "FROM_3_TO_5": "3 - 5 triệu VND",
+        "FROM_5_TO_10": "5 - 10 triệu VND",
+        "FROM_10_TO_18": "10 - 18 triệu VND",
+        "FROM_18_TO_25": "18 - 25 triệu VND",
+        "FROM_25_TO_50": "25 - 50 triệu VND",
+        "OVER_50": "50+ triệu VND",
+        "EXPECTED": "Thương lượng"
+    },
+    "gender": {
+        "FE_MALE": "Nữ",
+        "MALE": "Nam"
+    }
+}

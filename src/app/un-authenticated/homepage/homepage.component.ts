@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { AuthUser } from 'src/app/model/auth-user.model';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-homepage',
@@ -14,5 +13,9 @@ export class HomepageComponent implements OnInit{
 
   ngOnInit(): void {
     
+  }
+
+  parseYear() {
+    return moment().format("YYYY");
   }
 }

@@ -13,6 +13,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SuccessfullyRequestComponent } from './successfully-request/successfully-request.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { NavbarComponent } from './navbar/navbar.component';
         SuccessfullyRequestComponent,
         HomepageComponent,
         NavbarComponent,
+        FooterComponent,
     ],
 
     imports: [

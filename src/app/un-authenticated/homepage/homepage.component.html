@@ -2,12 +2,10 @@
     <app-navbar></app-navbar>
 </div>
 
-<div class="w-screen flex flex-column justify-content-center align-items-center">
-    <div class="flex justify-content-center align-items-center">
-        <!-- <app-footer></app-footer> -->
-    </div>
+<div class="w-screen flex flex-column justify-content-center align-items-center footer">
+    <app-footer></app-footer>
+</div>
 
-    <div class="flex justify-content-center align-items-center">
-        <!-- <p>&copy; 2023 </p> -->
-    </div>
+<div class="flex justify-content-center align-items-center w-screen footer-copyright">
+    <p [innerHTML]="'label.powered_by_quang_qui' | translate : { year: parseYear()}"></p>
 </div>

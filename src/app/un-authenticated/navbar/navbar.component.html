@@ -8,14 +8,17 @@
         </ul>
     </div>
 
-    <div class="flex justify-content-center align-items-center"
-        (click)="menu.toggle($event)">
-        <img src="../../../assets/images/icons/user-bold.svg" *ngIf="!authUser?.avatar" class="avatar" width="100%">
+    <div class="flex align-items-center">
+        <div (click)="init();menu.toggle($event)"  
+            class="flex justify-content-center align-items-center cursor-pointer">
+            <img src="../../../assets/images/icons/user-bold.svg" *ngIf="!authUser?.avatar" class="avatar" width="100%">
 
-        <img [src]="authUser?.avatar" *ngIf="authUser?.avatar" class="avatar" width="100%">
+            <img [src]="authUser?.avatar" *ngIf="authUser?.avatar" class="avatar" width="100%">
+        </div>
+
+        <p-dropdown [options]="languages" [optionLabel]="'label'" [optionValue]="'id'"
+            (onChange)="onLoadLang($event)" [(ngModel)]="lang"></p-dropdown>
     </div>
-
-    <p-menu #menu [model]="authUser?.id ? items : item" [popup]="true"></p-menu>
 </div>
 
 <div *ngIf="isMobileAndTablet" class="nav-mobile flex justify-content-around align-items-center relative">
@@ -77,7 +80,7 @@
                                 <span class="font-size-14">{{ 'label.profile' | translate }}</span>
                             </li>
         
-                            <li class="w-full flex justify-content-start align-items-center">
+                            <li class="w-full flex justify-content-start align-items-center" (click)="isChangePassword = true">
                                 <i class="pi pi-eye" style="margin-right: 10px;"></i>
                                 <span class="font-size-14">{{ 'label.change_password' | translate }}</span>
                             </li>
@@ -98,15 +101,16 @@
     
             <div class="w-full">
                 <p-dropdown [options]="languages" [optionLabel]="'label'" [optionValue]="'id'"
-                    [placeholder]="'label.chose_language_display' | translate">
-                
-                </p-dropdown>
+                    (onChange)="onLoadLang($event)" [(ngModel)]="lang"></p-dropdown>
             </div>
         </div>
     </ng-template>
 </p-sidebar>
 
-
+<p-sidebar [(visible)]="isLogin" (onHide)="isLogin = false"
+    *ngIf="isMobile" [fullScreen]="true">
+    <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (isClose)="onClose($event)"></app-sign-in>
+</p-sidebar>
 
 <p-dialog class="custom-dialog" [(visible)]="isLogin" (onHide)="isLogin = false" [draggable]="false"
     [header]="'button.sign_in' | translate" *ngIf="!isMobile">
@@ -115,7 +119,40 @@
     </div>
 </p-dialog>
 
-<p-sidebar [(visible)]="isLogin" (onHide)="isLogin = false"
-    *ngIf="isMobile" [fullScreen]="true">
-    <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (isClose)="onClose($event)"></app-sign-in>
-</p-sidebar>
+<p-dialog class="custom-dialog" [(visible)]="isChangePassword" (onHide)="onCancel()" [draggable]="false"
+    [header]="'label.change_password' | translate">
+    <form [formGroup]="changePasswordForm" style="padding-top: 30px;" class="change-password">
+        <div class="flex flex-column w-full margin-bottom-10">
+            <label for="pwd" class="font-size-14 font-bold" style="margin-bottom: 2px;">
+                {{ 'label.old_password' | translate }}
+            </label>
+            <p-password id="pwd" class="w-full" formControlName="oldPassword"
+                [toggleMask]="true"></p-password>
+        </div>
+
+        <div class="flex flex-column w-full margin-bottom-10">
+            <label for="pwd" class="font-size-14 font-bold" style="margin-bottom: 2px;">
+                {{ 'label.new_password' | translate }}
+            </label>
+            <p-password id="pwd" class="w-full" formControlName="newPassword"
+                [toggleMask]="true"></p-password>
+        </div>
+
+        <div class="flex flex-column w-full" style="margin-bottom: 25px;">
+            <label for="pwd" class="font-size-14 font-bold" style="margin-bottom: 2px;">
+                {{ 'label.confirm_new_password' | translate }}
+            </label>
+            <p-password id="pwd" class="w-full" formControlName="confirmNewPassword"
+                [toggleMask]="true"></p-password>
+        </div>
+
+        <div class="flex justify-content-center">
+            <p-button [label]="'label.change_password' | translate" 
+               [disabled]="changePasswordForm.invalid" (onClick)="onChangePassword()"></p-button>
+        </div>
+    </form>
+</p-dialog>
+
+<div class="toggle-menu">
+    <p-menu [model]="items" #menu [popup]="true"></p-menu>
+</div>

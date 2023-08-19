@@ -3,7 +3,19 @@
     height: 60px;
 }
 
-.footer-right {
+.footer {
+    background-color: var(--primary-50) !important;
+
+    & > div {
+        max-width: 1400px;
+    }
+}
+
+.footer-copyright {
     height: 64px;
-    background-color: var(--border-active-menu-item);
+    background-color: var(--border-active-menu-item) !important;
+
+    p {
+        color: var(--white) !important;
+    }
 }

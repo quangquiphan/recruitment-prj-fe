@@ -1,8 +1,11 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem, MessageService } from 'primeng/api';
 import { AuthUser } from 'src/app/model/auth-user.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+import AppConstant from 'src/app/utilities/app-constant';
+import AppUtil from 'src/app/utilities/app-util';
 
 @Component({
   selector: 'app-navbar',
@@ -10,65 +13,82 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit{
+  changePasswordForm: FormGroup = new FormGroup({});
   authUser: AuthUser | undefined;
   isMobileAndTablet: boolean = false;
   isMobile: boolean = false;
   isShowMenu: boolean = false;
   isShowSubMenu: boolean = false;
   isLogin: boolean = false;
+  isChangePassword: boolean = false;
+  isVisible: boolean = false;
   item: MenuItem[] = [];
   items: MenuItem[] = [];
   languages: any[] = [];
+  lang: string = 'en';
 
   constructor(
+    private fb: FormBuilder,
+    private messageService: MessageService,
     private translateService: TranslateService,
     private authenticatService: AuthenticateService,
-    private messageService: MessageService,
-  ) {}
+  ) {
+    this.changePasswordForm = this.fb.group({
+      oldPassword: ['', [
+        Validators.required,
+        Validators.pattern(AppConstant.PATTERNS.PASSWORD)
+      ]],
+      newPassword: ['', [
+        Validators.required,
+        Validators.pattern(AppConstant.PATTERNS.PASSWORD)
+      ]],
+      confirmNewPassword: ['', [
+        Validators.required,
+        Validators.pattern(AppConstant.PATTERNS.PASSWORD)
+      ]]
+    })
+  }
 
   ngOnInit(): void {
+    this.init();
     this.authUser = this.authenticatService.authUser;
     this.onResize();
-    this.init();
   }
 
   init() {
-    this.item = [
+    this.items = [
       {
-        label: this.translateService.instant('label.sign_in'),
+        label: this.parseLable('button.sign_in'),
         icon: 'pi pi-sign-in',
+        visible: !this.checkVisible(this.authUser),
         command: () => {
           this.isLogin = true;
         }
       },
       {
-        label: this.translateService.instant('button.sign_out'),
-        icon: 'pi pi-sign-out',
-        command: () => {
-          this.logout();
-        }
-      }
-    ];
-
-    this.items = [
-      {
-        label: this.translateService.instant('label.profile'),
+        label: this.parseLable('label.profile'),
         icon: 'pi pi-user',
+        visible: this.checkVisible(this.authUser),
         command: () => {}
       },
       {
-        label: this.translateService.instant('label.change_password'),
+        label: this.parseLable('label.change_password'),
         icon: 'pi pi-eye',
-        command: () => {}
+        visible: this.checkVisible(this.authUser),
+        command: () => {
+          this.isChangePassword = true;
+        }
       },
       {
-        label: this.translateService.instant('label.upload_cv'),
+        label: this.parseLable('label.upload_cv'),
         icon: 'pi pi-upload',
+        visible: this.checkVisible(this.authUser),
         command: () => {}
       },
       {
-        label: this.translateService.instant('button.sign_out'),
+        label: this.parseLable('button.sign_out'),
         icon: 'pi pi-sign-out',
+        visible: this.checkVisible(this.authUser),
         command: () => {
           this.logout();
         }
@@ -87,10 +107,54 @@ export class NavbarComponent implements OnInit{
     ]
   }
 
+  onCancel() {
+    this.isChangePassword = false;
+    this.changePasswordForm.reset();
+  }
+
+  onLoadLang(ev: any) {
+    if (ev) {
+      this.translateService.setDefaultLang(ev.value);
+      this.init();
+      console.log(this.translateService.instant('label.english'));
+    }
+  }
+
+  onChangePassword() {
+    let params = {
+      oldPassword: AppUtil.hasMD5(this.changePasswordForm.value.oldPassword),
+      newPassword: AppUtil.hasMD5(this.changePasswordForm.value.newPassword),
+      confirmNewPassword: AppUtil.hasMD5(this.changePasswordForm.value.confirmNewPassword),
+    }
+    
+    return this.authenticatService.changePassword(AppUtil.toSnakeCaseKey(params)).subscribe(
+      res => {
+        if (res.status === 200) {
+          AppUtil.getMessageSuccessfully(this.messageService, this.translateService,
+            'message.change_password_successfully');
+          this.isChangePassword = false;
+          this.changePasswordForm.reset();
+        } else {
+          AppUtil.getMessageFailed(this.messageService, this.translateService,
+            'message.change_password_failed');
+        }
+      }
+    )
+    
+  }
+
   onShowSubmenu(ev: any) {
     if (ev) {
       this.isShowSubMenu = !this.isShowSubMenu;
     }
+  }
+
+  checkVisible(authUser: AuthUser | undefined) {
+    if (authUser?.id) {
+      return true;
+    }
+
+    return false;
   }
 
   logout() {
@@ -101,7 +165,8 @@ export class NavbarComponent implements OnInit{
           this.authenticatService.clearSession();
           this.authenticatService.doResetAuthUser();
           this.authenticatService.setAuthUser(undefined)
-          this.authUser = undefined;          
+          this.authUser = undefined;
+          this.isVisible = true;         
         }
       }
     )
@@ -111,6 +176,7 @@ export class NavbarComponent implements OnInit{
     if (ev) {
       this.isLogin = false;
       this.authUser  = this.authenticatService.authUser;
+      this.isVisible = false;
     }
   }
 
@@ -118,5 +184,9 @@ export class NavbarComponent implements OnInit{
   onResize(event?: any) {
     this.isMobileAndTablet = window.innerWidth < 800 ? true : false;
     this.isMobile = window.innerWidth < 525 ? true : false;
+  }
+
+  parseLable(label: string) {    
+    return this.translateService.instant(label);
   }
 }
