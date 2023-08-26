@@ -1,0 +1,50 @@
+.job-detail {
+    width: 100%;
+    max-width: 801px;
+    padding: 0 30px;
+    position: relative;
+
+    .logo {
+        width: 70px;
+        height: 70px;
+        border: 1px solid var(--primary-100);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 20px;
+    }
+
+    .job-detail-info {
+        margin-bottom: 20px;
+    }
+
+    p {
+        line-height: 1.7;
+    }
+}
+
+:host::ng-deep {
+    .apply {
+        .btn-edit {
+            margin-right: 15px;
+        }
+
+        .p-button {
+            width: 180px !important;
+        }
+    }
+
+    .p-dialog {
+        max-height: fit-content !important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    :host::ng-deep {
+        .apply {
+            .p-button {
+                width: 120px !important;
+            }
+        }
+    }
+}

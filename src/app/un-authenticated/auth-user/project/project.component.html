@@ -1,0 +1,65 @@
+<form [formGroup]="projectForm">
+    <div>
+        <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+            <label for="project_name" style="margin-bottom: 3px;" class="font-bold">
+                {{ 'label.project_name' | translate }}
+            </label>
+        
+            <input pInputText type="text" id="project_name" formControlName="projectName">
+        </div>
+    
+        <div class="flex w-full justify-content-between align-items-start ptime">
+            <div class="flex flex-column time" style="margin-bottom: 10px;">
+                <label for="from_date" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.from_date' | translate }}
+                </label>
+                
+                <p-calendar inputId="from_date" [dateFormat]="'dd-mm-yy'" formControlName="fromDate" 
+                    [showIcon]="true" [appendTo]="'body'"></p-calendar>
+            </div>
+    
+            <div class="flex flex-column time" style="margin-bottom: 10px;">
+                <label for="to_date" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.to_date' | translate }}
+                </label>
+                
+                <p-calendar inputId="to_date" [dateFormat]="'dd-mm-yy'"  [showIcon]="true"
+                    formControlName="toDate" [appendTo]="'body'"></p-calendar>
+            </div>
+        </div>
+    
+        <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+            <label for="team_sie" style="margin-bottom: 3px;" class="font-bold">
+                {{ 'label.team_size' | translate }}
+            </label>
+        
+            <p-inputNumber class="w-full" inputId="teamSize" [min]="1" [max]="999999" 
+                formControlName="teamSize"></p-inputNumber>
+        </div>
+    
+        <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+            <label for="tech" style="margin-bottom: 3px;" class="font-bold">
+                {{ 'label.technology' | translate }}
+            </label>
+        
+            <input pInputText type="text" id="tech" formControlName="technology">
+        </div>
+    
+        <div class="w-full flex flex-column" style="margin-bottom: 30px;">
+            <label for="des" style="margin-bottom: 3px;" class="font-bold">
+                {{ 'label.description' | translate }}
+            </label>
+            
+            <p-editor id="des" [style]="{height: '100px'}" 
+                formControlName="description"></p-editor>
+        </div>
+
+        <div class="w-full flex justify-content-center align-items-center" style="margin-bottom: 30px;">
+            <p-button class="btn" [label]="(id ? 'button.edit' : 'button.submit') | translate"
+                [ngClass]="id ? 'btn-edit' : ''" (onClick)="onSubmit()" 
+                [disabled]="projectForm.invalid || disable"></p-button>
+            <p-button [label]="'button.cancel' | translate"
+                (onClick)="onReloadData.emit('')"></p-button>
+        </div>
+    </div>
+</form>

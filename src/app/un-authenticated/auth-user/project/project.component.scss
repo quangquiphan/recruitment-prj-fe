@@ -1,0 +1,58 @@
+.fit-content {
+    width: fit-content !important;
+}
+
+.ptime {
+    .time {
+        width: 49%;
+    }
+}
+
+.btn {
+    margin-right: 20px;
+}
+
+:host::ng-deep {
+    .p-inputnumber {
+        width: 100%;
+    }
+
+    .time {
+        .p-button {
+            min-width: unset !important;
+            border-radius: unset !important;
+            border-top-right-radius: 6px !important;
+            border-bottom-right-radius: 6px !important;
+        }
+
+        .p-calendar-w-btn .p-datepicker-trigger {
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+
+        .p-icon {
+            color: (var(--white)) !important;
+        }
+    }
+
+    @media screen and (max-width: 520px) {
+        form {
+            width: 280px;
+        }
+        
+        .btn {
+            margin-right: 20px;
+        }
+
+        .ptime {
+            flex-direction: column;
+            .time {
+                width: 100% !important;
+            }
+        }
+    
+        form > div > div:last-child .p-button {
+            min-width: 120px !important;
+        }
+    }
+}

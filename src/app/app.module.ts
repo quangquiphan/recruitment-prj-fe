@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthenticatedModule } from './authenticated/authenticated.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HTTP_INTERCEPTORS, HttpBackend, HttpClient, HttpClientModule } from '@angular/common/http';
 import { UnAuthenticatedModule } from './un-authenticated/un-authenticated.module';
@@ -27,7 +26,6 @@ export function createTranslateLoader(http: HttpBackend) {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    AuthenticatedModule,
     UnAuthenticatedModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',

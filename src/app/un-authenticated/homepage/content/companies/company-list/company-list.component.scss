@@ -1,0 +1,46 @@
+.company {
+    width: 100%;
+    padding: 10px 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .company-item {
+        border: 1px solid var(--primary-100);
+        border-radius: 6px;
+        background-color: var(--primary-50);
+        padding: 20px;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0 20px 20px 0;
+
+        .c-avt {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .company {
+        padding: 0 20px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+        .company-item {
+            margin: 0 0px 20px 0;
+        }
+
+        .company-item:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

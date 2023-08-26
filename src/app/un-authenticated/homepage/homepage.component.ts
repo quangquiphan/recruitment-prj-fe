@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -7,7 +7,6 @@ import * as moment from 'moment';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit{
-
   constructor(
   ) {}
 

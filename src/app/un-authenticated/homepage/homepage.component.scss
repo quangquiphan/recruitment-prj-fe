@@ -1,18 +1,29 @@
 .navbar {
     background-color: var(--primary-50);
     height: 60px;
+    min-width: 100%;
+    box-sizing: border-box;
+}
+
+.content {
+    padding: 30px 0;
+    min-width: 100%;
+    box-sizing: border-box;
+    & > div {
+        width: 100%;
+    }
 }
 
 .footer {
+    min-width: 100%;
+    box-sizing: border-box;
     background-color: var(--primary-50) !important;
-
-    & > div {
-        max-width: 1400px;
-    }
 }
 
 .footer-copyright {
     height: 64px;
+    box-sizing: border-box;
+    min-width: 100%;
     background-color: var(--border-active-menu-item) !important;
 
     p {

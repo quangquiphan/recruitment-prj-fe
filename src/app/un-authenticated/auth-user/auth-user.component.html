@@ -1,0 +1,481 @@
+<div class="w-full flex justify-content-center">
+    <div class="info flex flex-column justify-content-center align-items-start">
+        <div class="flex align-items-center justify-content-center w-full" style="min-width: 290px;">
+            <div class="relative">
+                <div class="icon"
+                    *ngIf="!user?.avatar">
+                    <img src="../../../../assets/images/TopWork-logo.png" width="100%">
+                </div>
+
+                <img [src]="user?.avatar" class="icon" *ngIf="user?.avatar">
+
+                <label for="avatar" class="avatar flex justify-content-center align-items-center cursor-pointer">
+                    <img src="../../../assets/images/icons/take-picture.svg">
+                </label>
+                <input type="file" id="avatar" [hidden]="true" (change)="selectedAvatar($event)">
+            </div>
+    
+            <div class="flex flex-column">
+                <div class="flex justify-content-start align-items-center" style="margin-bottom: 3px;">
+                    <h2 style="margin-right: 10px;" class="full-name">
+                        {{ getFullName(user?.firstName, user?.lastName) }}
+                    </h2>
+
+                    <img src="../../../assets/images/icons/edit-2.svg" [width]="24" (click)="isEditInformation = true">
+                </div>
+                <h4 style="margin-bottom: 3px;">{{ user?.position }}</h4>
+                <span *ngIf="user?.yearExperience">
+                    {{ parseYearExperience(user?.yearExperience || '') }}
+                </span>
+            </div>
+        </div>
+    
+        <div *ngIf="user?.summary">
+            <h1 class="boder-text flex align-items-center">
+                <img class="i" src="../../../../assets/images/icons/archive-minus.svg" alt="">
+                <span>{{ 'label.summary' | translate }}</span>
+            </h1>
+    
+            <p [innerHTML]="user?.summary"></p>
+        </div>
+    
+        <div class="w-full flex info-edu justify-content-between">
+            <div>
+                <h1 class="boder-text flex align-items-center">
+                    <img src="../../../../assets/images/icons/info-circle.svg" alt="" class="i">
+                    <span>{{ 'label.information' | translate }}</span>
+                </h1>
+                <div class="flex align-items-center" *ngIf="user?.gender">
+                    <img src="../../../../assets/images/icons/gender.svg" style="margin: 0 5px 5px 0;" alt="">
+                    <p>{{ parseGender(user?.gender || '') }}</p>
+                </div>
+        
+                <div class="flex align-items-center" *ngIf="user?.phoneNumber">
+                    <img src="../../../../assets/images/icons/call.svg" style="margin: 0 5px 5px 0;" alt="">
+                    <p>{{ user?.phoneNumber }}</p>
+                </div>
+        
+                <div class="flex align-items-center" *ngIf="user?.email">
+                    <img src="../../../../assets/images/icons/sms.svg" style="margin: 0 5px 5px 0;" alt="">
+                    <p>{{ user?.email }}</p>
+                </div>
+        
+                <div class="flex align-items-center" *ngIf="user?.link">
+                    <img src="../../../../assets/images/icons/global.svg" style="margin: 0 5px 5px 0;" alt="">
+                    <p>{{ user?.link }}</p>
+                </div>
+        
+                <div class="flex align-items-center" *ngIf="user?.address">
+                    <img src="../../../../assets/images/icons/location.svg" style="margin: 0 5px 5px 0;" alt="">
+                    <p>{{ user?.address }}</p>
+                </div>
+            </div>
+            
+            <div>
+                <div class="w-full flex justify-content-between align-items-start">
+                    <h1 class="boder-text flex align-items-center">
+                        <img src="../../../../assets/images/icons/buliding.svg" [width]="24">
+                        <span>{{ "label.education" | translate }}</span>
+                    </h1>
+
+                    <img src="../../../assets/images/icons/add.svg" [width]="30" 
+                        class="cursor-pointer" (click)="isAddEducation = true">
+                </div>
+
+                <div *ngIf="user?.educations">
+                    <div class="flex flex-column w-full relative education-data" 
+                        *ngFor="let item of user?.educations">
+                        <div class="w-full flex justify-content-end align-items-center">
+                            <div class="flex align-items-center">
+                                <div class="control cursor-pointer" (click)="getEducation(item.id)">
+                                    <img src="../../../assets/images/icons/edit-2.svg" [width]="24">
+                                </div>
+
+                                <div class="control control-delete cursor-pointer" (click)="isShowConfirmDelete = true; eduId = item.id">
+                                    <img src="../../../assets/images/icons/close.svg" [width]="24">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full">
+                            <div class="flex w-full justify-content-between align-items-center">
+                                <h3 style="margin-right: 10px;">{{ item.schoolName }}</h3>
+                                <span class="text-right">{{ parseFromAndToDate(item.fromDate, item.toDate, item.current) }}</span>
+                            </div>
+                            <p>{{ 'Major : ' + item.major }}</p>
+                            <p [innerHTML]="item.description"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="w-full work-history">
+            <div class="w-full flex justify-content-between align-items-start">
+                <h1 class="boder-text flex align-items-center">
+                    <img src="../../../../assets/images/icons/briefcase.svg" [width]="24">
+                    <span>{{ 'label.work_history' | translate }}</span>
+                </h1>
+
+                <img src="../../../assets/images/icons/add.svg" [width]="30" 
+                    class="cursor-pointer" (click)="isShowWorkHistory = true">
+            </div>
+            
+            <div *ngIf="user?.workHistories?.length">
+                <div class="flex flex-column w-full relative work-history-data" 
+                    *ngFor="let item of user?.workHistories">
+                    <span class="line-node"></span>
+                    <div class="w-full workplace">
+                        <div class="w-full flex justify-content-end align-items-center">
+                            <div class="flex align-items-center">
+                                <div class="control cursor-pointer" (click)="isShowWorkHistory = true; workId = item.id">
+                                    <img src="../../../assets/images/icons/edit-2.svg" [width]="24">
+                                </div>
+
+                                <div class="control control-delete cursor-pointer" (click)="isShowConfirmDelete = true; workId = item.id">
+                                    <img src="../../../assets/images/icons/close.svg" [width]="24">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex w-full justify-content-between align-items-center">
+                            <div class="flex align-items-center" style="margin-right: 10px;">
+                                <img src="../../../../assets/images/icons/buliding.svg" style="margin-right: 5px;">
+                                <h3>{{ item.companyName }}</h3>
+                            </div>
+                            <span class="text-right">{{ parseFromAndToDate(item.fromDate, item.toDate, item.current) }}</span>
+                        </div>
+                        <p [innerHTML]="'label.p_position' | translate : {position: item.position}" style="margin-bottom: 10px;"></p>
+                        <p [innerHTML]="item.description"></p>
+                    </div>
+        
+                    <div class="project">
+                        <div class="flex justify-content-between align-items-start">
+                            <h3 class="boder-text flex align-items-center" style="margin-bottom: 15px; margin-right: 10px;">
+                                <img src="../../../../assets/images/icons/clipboards.svg" style="margin-right: 5px">
+                                <span>{{ (item.projects.length > 1 ? 'label.projects' : 'label.project') | translate }}</span>
+                            </h3>
+
+                            <img src="../../../assets/images/icons/add.svg" [width]="30" (click)="isShowProject = true; workId = item.id">
+                        </div>
+                        <div *ngIf="item.projects.length">
+                            <div class="flex flex-column"  *ngFor="let p of item.projects">
+                                <div class="w-full flex justify-content-end align-items-center">
+                                    <div class="flex align-items-center">
+                                        <div class="control cursor-pointer" (click)="isShowProject = true; workId = item.id; proId = p.id">
+                                            <img src="../../../assets/images/icons/edit-2.svg" [width]="24">
+                                        </div>
+        
+                                        <div class="control control-delete cursor-pointer" (click)="isShowConfirmDelete = true; proId = p.id">
+                                            <img src="../../../assets/images/icons/close.svg" [width]="24">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex w-full justify-content-between align-items-center">
+                                    <div class="flex align-items-center" style="margin-right: 10px;">
+                                        <img src="../../../../assets/images/icons/clipboard.svg" style="margin-right: 5px;">
+                                        <h3>{{ p.projectName }}</h3>
+                                    </div>
+                                    <span class="text-right">{{ parseFromAndToDate(p.fromDate, p.toDate, false) }}</span>
+                                </div>
+                                <span>{{ 'label.t_size' | translate : {size: p.teamSize} }}</span>
+                                <span>{{ 'label.t_tech' | translate : {tech: p.technology} }}</span>
+                                <p [innerHTML]="p.description"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+     
+        <div *ngIf="user?.skills?.length || user?.skills?.length">
+            <h1 class="boder-text flex align-items-center">
+                <img src="../../../../assets/images/icons/task.svg">
+                <span>{{ 'label.skills' | translate }}</span>
+            </h1>
+
+            <div class="flex flex-wrap">
+                <p-chip class="item" *ngFor="let i of user?.skills">{{ i.name }}</p-chip>
+                <p-chip class="item" *ngFor="let i of user?.languages">{{ i.name }}</p-chip>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Update profile user -->
+<!-- Done -->
+<p-dialog class="custom-dialog" [(visible)]="isEditInformation" (onHide)="onCancelUpdateInfo()"
+    [header]="'label.edit_information' | translate" [draggable]="false">
+    <div class="w-full flex justify-content-center align-items-center">
+        <form style="padding-top: 30px;" [formGroup]="infoForm">
+            <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+                <label for="email" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.email' | translate }}
+                </label>
+            
+                <input pInputText type="text" id="email" formControlName="email" 
+                    [readOnly]="true" [disabled]="true">
+            </div>
+    
+            <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+                <label for="position" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.position' | translate }}
+                </label>
+            
+                <input pInputText type="text" id="position" formControlName="position">
+            </div>
+    
+            <div class="flex justify-content-between fname w-full" style="margin-bottom: 10px;">
+                <div class="flex flex-column">
+                    <label for="firstName" style="margin-bottom: 3px;" class="font-bold">
+                        {{ 'label.first_name' | translate }}
+                    </label>
+                
+                    <input pInputText type="text" id="firstName" formControlName="first_name">
+                </div>
+        
+                <div class="flex flex-column">
+                    <label for="lastName" style="margin-bottom: 3px;" class="font-bold">
+                        {{ 'label.last_name' | translate }}
+                    </label>
+                
+                    <input pInputText type="text" id="lastName" formControlName="last_name">
+                </div>
+            </div>
+    
+            <div class="w-full flex flex-column" style="margin-bottom: 10px;">
+                <label for="gender" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.gender' | translate }}
+                </label>
+                
+                <p-dropdown inputId="gender" [options]="genders" [optionLabel]="'label'"
+                    [optionValue]="'id'" formControlName="gender"></p-dropdown>
+            </div>
+    
+            <div class="w-full flex flex-column time" style="margin-bottom: 10px;">
+                <label for="date_of_birth" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.date_of_birth' | translate }}
+                </label>
+                
+                <p-calendar inputId="date_of_birth" [dateFormat]="'dd-mm-yy'" formControlName="date_of_birth"
+                    [showIcon]="true" [placeholder]="'dd-mm-yyyy'" [appendTo]="'body'"></p-calendar>
+            </div>
+        
+            <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+                <label for="phone" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.phone_number' | translate }}
+                </label>
+            
+                <input pInputText type="text" id="phone" formControlName="phone_number">
+            </div>
+    
+            <div class="w-full flex flex-column" style="margin-bottom: 10px;">
+                <label for="major" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.major' | translate }}
+                </label>
+                
+                <p-dropdown inputId="major" [options]="majors" [optionLabel]="'label'"
+                    [optionValue]="'id'" formControlName="major"></p-dropdown>
+            </div>
+    
+            <div class="w-full flex flex-column" style="margin-bottom: 10px;">
+                <label for="summary" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.summary' | translate }}
+                </label>
+                
+                <p-editor id="summary" [style]="{height: '100px'}" 
+                    formControlName="summary"></p-editor>
+            </div>
+    
+            <div class="w-full flex flex-column" style="margin-bottom: 10px;">
+                <label for="year" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.year_experience' | translate }}
+                </label>
+                
+                <p-dropdown inputId="year" [options]="yearExperiences" [optionLabel]="'label'"
+                    [optionValue]="'id'" formControlName="year_experience"></p-dropdown>
+            </div>
+        
+            <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+                <label for="link" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.link' | translate }}
+                </label>
+            
+                <input pInputText type="text" id="link" formControlName="link">
+            </div>
+        
+            <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+                <label for="address" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.address' | translate }}
+                </label>
+            
+                <input pInputText type="text" id="address" formControlName="address">
+            </div>
+    
+            <div style="margin-bottom: 20px;" class="w-full">
+                <div class="flex justify-content-between w-full align-items-center skill">
+                    <h2 class="font-size-16">{{ 'label.skills' | translate }}</h2>
+                    <img src="../../../../assets/images/icons/add.svg" [width]="30"
+                        (click)="addSkill()">
+                </div>
+        
+                <div formArrayName="skills">
+                    <div *ngFor="let item of skills?.controls; let i = index">
+                        <div [formGroupName]="i" *ngIf="checkSkill(i)"
+                            class="skill-item flex justify-content-between align-items-center">
+                            <div style="width: 90%;"> 
+                                <p-dropdown formControlName="skill_id" [options]="listSkills" [optionLabel]="'skillName'" 
+                                    [optionValue]="'id'" [filter]="true" [draggable]="false">
+                                </p-dropdown>
+                            </div>
+                            <img src="../../../../assets/images/icons/delete.svg"
+                                style="border: none;" [width]="40" (click)="removeSkill(i)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div style="margin-bottom: 40px;" class="w-full">
+                <div class="flex justify-content-between w-full align-items-center skill">
+                    <h2 class="font-size-16">{{ 'label.languages' | translate }}</h2>
+                    <img src="../../../../assets/images/icons/add.svg" (click)="addLang()" 
+                        [width]="30" alt="">
+                </div>
+        
+                <div formArrayName="languages" class="skill-item">
+                    <div *ngFor="let item of languages?.controls; let i = index">
+                        <div [formGroupName]="i" *ngIf="checkLang(i)" 
+                            class="skill-item flex justify-content-between align-items-center">
+                            <div style="width: 90%;"> 
+                                <p-dropdown formControlName="lang_id" [options]="listLang" [optionLabel]="'language'" 
+                                    [optionValue]="'id'" [filter]="true" [draggable]="false">
+                                </p-dropdown>
+                            </div>
+                            <img src="../../../../assets/images/icons/delete.svg" (click)="removeLang(i)"
+                                style="border: none;" [width]="40" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="w-full flex justify-content-center align-items-center">
+                <p-button class="btn btn-edit" [label]="'button.edit' | translate"
+                    (onClick)="onSubmitUpdateProfile()"></p-button>
+                <p-button [label]="'button.cancel' | translate"></p-button>
+            </div>
+        </form>
+    </div>
+</p-dialog>
+
+<!-- Add and edit education -->
+<!-- Done -->
+<p-dialog class="custom-dialog" [(visible)]="isAddEducation" (onHide)="onCancelAddEdu()"
+[draggable]="false" [header]="'label.add_education' | translate">
+    <div class="w-full flex justify-content-center align-items-center">
+        <form style="padding-top: 30px;" [formGroup]="eduForm">
+            <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+                <label for="schoolName" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.school_name' | translate }}
+                </label>
+            
+                <input pInputText type="text" id="schoolName" formControlName="schoolName">
+            </div>
+
+            <div class="flex w-full justify-content-between align-items-start btime">
+                <div class="flex flex-column time" style="margin-bottom: 10px;">
+                    <label for="fromDate" style="margin-bottom: 3px;" class="font-bold">
+                        {{ 'label.from_date' | translate }}
+                    </label>
+                    
+                    <p-calendar inputId="fromDate" [dateFormat]="'dd-mm-yy'" formControlName="fromDate" 
+                        [showIcon]="true" [appendTo]="'body'"></p-calendar>
+                </div>
+        
+                <div class="flex flex-column time fit-content justify-content-between align-items-center" 
+                    style="margin-bottom: 10px;">
+                    <label for="current" style="margin-bottom: 3px;" class="font-bold">
+                        {{ 'label.current' | translate }}
+                    </label>
+                    
+                    <p-checkbox inputId="current" [binary]="true" formControlName="isCurrent"></p-checkbox>
+                </div>
+        
+                <div class="flex flex-column time" style="margin-bottom: 10px;">
+                    <label for="toDate" style="margin-bottom: 3px;" class="font-bold">
+                        {{ 'label.to_date' | translate }}
+                    </label>
+                    
+                    <p-calendar inputId="toDate" [dateFormat]="'dd-mm-yy'"  [showIcon]="true"
+                        formControlName="toDate" [appendTo]="'body'" [disabled]="eduForm.value.isCurrent"></p-calendar>
+                </div>
+            </div>
+        
+            <div class="flex flex-column w-full" style="margin-bottom: 10px;">
+                <label for="major" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.major' | translate }}
+                </label>
+            
+                <input pInputText type="text" id="major" formControlName="course">
+            </div>
+
+            <div class="w-full flex flex-column" style="margin-bottom: 10px;">
+                <label for="des" style="margin-bottom: 3px;" class="font-bold">
+                    {{ 'label.description' | translate }}
+                </label>
+                
+                <p-editor id="des" [style]="{height: '100px'}" 
+                    formControlName="description"></p-editor>
+            </div>
+
+            <div class="w-full b flex justify-content-center align-items-center">
+                <p-button class="btn" *ngIf="!eduId" [label]="'button.submit' | translate"
+                    (onClick)="onSubmitEdu()"></p-button>
+                
+                <p-button class="btn btn-edit" *ngIf="eduId" [label]="'button.edit' | translate"
+                    (onClick)="onSubmitEdu()"></p-button>
+                
+                <p-button *ngIf="!eduId" [label]="'button.cancel' | translate" class="btn-cancel"
+                    (onClick)="onCancelAddEdu()"></p-button>
+
+                <p-button *ngIf="eduId" [label]="'button.delete' | translate" class="btn-delete"
+                    (onClick)="isShowConfirmDelete = true"></p-button>
+            </div>
+        </form>
+    </div>
+</p-dialog>
+
+<p-dialog class="custom-dialog" [(visible)]="isShowWorkHistory" (onHide)="isShowWorkHistory = false; workId = ''"
+    [header]="(workId ? 'label.edit_work_history' : 'label.add_work_history') | translate">
+    <div class="w-full" style="padding-top: 30px;">
+        <app-work-history *ngIf="isShowWorkHistory" [userId]="userId" [id]="workId"
+            (onReloadData)="onReloadData($event)"></app-work-history>
+    </div>
+</p-dialog>
+
+<p-dialog class="custom-dialog" [(visible)]="isShowProject" (onHide)="isShowProject = false; proId = ''"
+    [header]="(workId ? 'label.edit_project' : 'label.add_project') | translate">
+    <div class="w-full" style="padding-top: 30px;">
+        <app-project *ngIf="isShowProject" [workId]="workId" [id]="proId"
+            (onReloadData)="onReloadData($event)"></app-project>
+    </div>
+</p-dialog>
+
+<p-dialog class="custom-dialog" [(visible)]="isShowConfirmDelete" (onHide)="onCancel()"
+    [header]="'label.confirm_delete' | translate">
+    <div class="w-full flex justify-content-center align-items-center" 
+        style="padding-top: 30px; margin-bottom: 30px;">
+        <span>{{ 'message.do_u_wanna_delete' | translate }}</span>
+    </div>
+    
+    <div class="w-full b flex justify-content-center align-items-center">
+        <p-button class="btn btn-delete" [label]="'button.delete' | translate"
+            (onClick)="onDeleteEdu()" *ngIf="eduId"></p-button>
+            
+        <p-button class="btn btn-delete" [label]="'button.delete' | translate"
+            (onClick)="onDeleteWorkHistory()" *ngIf="workId"></p-button>
+            
+        <p-button class="btn btn-delete" [label]="'button.delete' | translate"
+            (onClick)="onDeleteProject()" *ngIf="proId"></p-button>
+
+        <p-button [label]="'button.cancel' | translate"
+            (onClick)="onCancel()"></p-button>
+    </div>
+</p-dialog>

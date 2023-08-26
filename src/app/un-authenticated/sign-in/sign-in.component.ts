@@ -13,7 +13,7 @@ import AppUtil from 'src/app/utilities/app-util';
 })
 export class SignInComponent implements OnInit{
   @Input() isMobile: boolean = false;
-  @Output() isClose: EventEmitter<Boolean> = new EventEmitter();
+  @Output() onClose: EventEmitter<any> = new EventEmitter();
   signInForm: FormGroup = new FormGroup({});
   disable: boolean = false;
 
@@ -49,7 +49,6 @@ export class SignInComponent implements OnInit{
     return this.authenticateService.login(AppUtil.toSnakeCaseKey(params)).subscribe(
       res => {
         if (res.status === 200) {
-          this._router.navigate(['/home']).then(r => {});
           this.signInForm.reset();
           this.authenticateService.setToken(res.data.accessToken);
           this.authenticateService.getAuthInfo().subscribe(
@@ -57,7 +56,7 @@ export class SignInComponent implements OnInit{
               if (res.status === 200) {
                 const authUser: AuthUser = res.data;
                 this.authenticateService.setAuthUser(authUser);
-                this.isClose.emit(true);
+                this.onClose.emit(authUser);
               }
             }
           );

@@ -14,6 +14,17 @@ import { SuccessfullyRequestComponent } from './successfully-request/successfull
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { ContentComponent } from './homepage/content/content.component';
+import { JobsComponent } from './homepage/content/jobs/jobs.component';
+import { CompaniesComponent } from './homepage/content/companies/companies.component';
+import { CompanyDetailComponent } from './homepage/content/companies/company-detail/company-detail.component';
+import { CompanyListComponent } from './homepage/content/companies/company-list/company-list.component';
+import { JobDetailComponent } from './homepage/content/jobs/job-detail/job-detail.component';
+import { CompanyInfoComponent } from './homepage/content/companies/company-detail/company-info/company-info.component';
+import { JobListComponent } from './homepage/content/jobs/job-list/job-list.component';
+import { AuthUserComponent } from "./auth-user/auth-user.component";
+import { WorkHistoryComponent } from './auth-user/work-history/work-history.component';
+import { ProjectComponent } from './auth-user/project/project.component';
 
 @NgModule({
     declarations: [
@@ -27,6 +38,17 @@ import { FooterComponent } from './footer/footer.component';
         HomepageComponent,
         NavbarComponent,
         FooterComponent,
+        ContentComponent,
+        JobsComponent,
+        CompaniesComponent,
+        CompanyDetailComponent,
+        CompanyListComponent,
+        JobDetailComponent,
+        CompanyInfoComponent,
+        JobListComponent,
+        AuthUserComponent,
+        WorkHistoryComponent,
+        ProjectComponent,
     ],
 
     imports: [

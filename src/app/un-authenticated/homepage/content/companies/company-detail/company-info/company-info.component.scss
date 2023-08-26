@@ -1,0 +1,20 @@
+.company-info {
+    justify-content: center;
+}
+
+.overview {
+    h3 {
+        margin-bottom: 20px;
+    }
+
+    p {
+        line-height: 1.47;
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .company-info {
+        justify-content: flex-start;
+    }
+}

@@ -322,8 +322,7 @@ const AppData = {
     },
 
     getSalary(translate: TranslateService) {
-        return [
-            
+        return [           
             {
                 id: "EXPECTED",
                 label: translate.instant('salary.EXPECTED')
@@ -368,7 +367,48 @@ const AppData = {
             {
                 id: 'MALE',
                 label: translate.instant('gender.MALE')
+            },
+            {
+                id: 'ORTHER',
+                label: translate.instant('gender.ORTHER')
             }
+        ]
+    },
+
+    getYearExperience(translate: TranslateService) {
+        return [
+            {
+                id: "NON_EXPERIENCE",
+                label: translate.instant('YEAR_EXPERIENCE.NON_EXPERIENCE')
+            },
+            {
+                id: "UNDER_1_YEAR",
+                label: translate.instant('YEAR_EXPERIENCE.UNDER_1_YEAR')
+            },
+            {
+                id: "ONE_YEAR",
+                label: translate.instant('YEAR_EXPERIENCE.ONE_YEAR')
+            },
+            {
+                id: "TWO_YEAR",
+                label: translate.instant('YEAR_EXPERIENCE.TWO_YEAR')
+            },
+            {
+                id: "THREE_YEAR",
+                label: translate.instant('YEAR_EXPERIENCE.THREE_YEAR')
+            },
+            {
+                id: "FOUR_YEAR",
+                label: translate.instant('YEAR_EXPERIENCE.FOUR_YEAR')
+            },
+            {
+                id: "FIVE_YEAR",
+                label: translate.instant('YEAR_EXPERIENCE.FIVE_YEAR')
+            },
+            {
+                id: "OVER_FIVE_YEAR",
+                label: translate.instant('YEAR_EXPERIENCE.OVER_FIVE_YEAR')
+            },
         ]
     }
 }

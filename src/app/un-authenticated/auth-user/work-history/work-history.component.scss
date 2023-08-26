@@ -1,0 +1,73 @@
+.fit-content {
+    width: fit-content !important;
+}
+
+.btime {
+    .time:first-child, .time:last-child {
+        width: 38% !important;
+    }
+
+    .time:nth-child(2) {
+        width: 30%;
+    }
+}
+
+.project-item {
+    margin-bottom: 20px;
+}
+
+.ptime {
+    .time {
+        width: 49%;
+    }
+}
+
+.btn {
+    margin-right: 20px;
+}
+
+.remove {
+    width: fit-content;
+    padding: 10px;
+    border: 1px solid var(--red-200);
+    background-color: var(--red-100);
+    border-bottom: unset;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+:host::ng-deep {
+    .p-inputnumber {
+        width: 100%;
+    }
+
+    @media screen and (max-width: 520px) {
+        form {
+            width: 280px;
+        }
+        
+        .btn {
+            margin-right: 20px;
+        }
+    
+        form > div:last-child .p-button {
+            min-width: 120px !important;
+        }
+
+        .ptime {
+            flex-direction: column;
+            .time {
+                width: 100% !important;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 543px) {
+    .btime {
+        flex-direction: column;
+        .time:first-child, .time:last-child {
+            width: 100% !important;
+        }
+    }
+}

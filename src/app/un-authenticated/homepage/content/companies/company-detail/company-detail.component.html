@@ -1,0 +1,20 @@
+<div class="company-info w-full flex justify-content-center" style="margin-bottom: 30px;">
+    <div class="flex align-items-center">
+        <div class="logo" *ngIf="!company?.avatar">
+            <img src="../../../../../../assets/images/TopWork-logo.png" width="100%">
+        </div>
+    
+        <img [src]="company?.avatar" *ngIf="company?.avatar" class="logo">
+
+        <h3>{{ company?.companyName }}</h3>
+    </div>
+</div>
+
+<p-tabView (onChange)="onChangeTabView($event)" [activeIndex]="selectedTab">
+    <p-tabPanel *ngFor="let tab of tabViews" [selected]="tab.index === selectedTab" 
+        [header]="tab.label | translate">
+        <app-company-info *ngIf="selectedTab == 0" [company]="company"></app-company-info>
+        <app-job-list *ngIf="selectedTab == 1" [isNavigateFromCompany]="true" [companyId]="paging.companyId">
+        </app-job-list>
+    </p-tabPanel>
+</p-tabView>

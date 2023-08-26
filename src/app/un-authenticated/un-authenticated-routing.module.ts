@@ -8,6 +8,13 @@ import { SuccessfullyRequestComponent } from "./successfully-request/successfull
 import { HomepageComponent } from "./homepage/homepage.component";
 import { UnAuthenticatedComponent } from "./un-authenticated.component";
 import { AuthGuard } from "../interceptors/auth-guard.service";
+import { JobsComponent } from "./homepage/content/jobs/jobs.component";
+import { CompaniesComponent } from "./homepage/content/companies/companies.component";
+import { CompanyDetailComponent } from "./homepage/content/companies/company-detail/company-detail.component";
+import { CompanyListComponent } from "./homepage/content/companies/company-list/company-list.component";
+import { JobDetailComponent } from "./homepage/content/jobs/job-detail/job-detail.component";
+import { JobListComponent } from "./homepage/content/jobs/job-list/job-list.component";
+import { AuthUserComponent } from "./auth-user/auth-user.component";
 
 const routes: Routes = [
     {
@@ -15,10 +22,59 @@ const routes: Routes = [
         component: UnAuthenticatedComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: '', redirectTo: '/home', pathMatch: 'full' },
+            { path: '', redirectTo: '/jobs', pathMatch: 'full' },
             {
-                path: "home",
-                component: HomepageComponent
+                path: '',
+                component: HomepageComponent,
+                children: [
+                    {
+                        path: '',
+                        redirectTo: '/jobs',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: "jobs",
+                        component: JobsComponent,
+                        children: [
+                            {
+                                path: '',
+                                component: JobListComponent
+                            },
+                            {
+                                path: ':id',
+                                component: JobDetailComponent
+                            }
+                        ]
+                    },
+                    {
+                        path: "company",
+                        component: CompaniesComponent,
+                        children: [
+                            {
+                                path: '',
+                                component: CompanyListComponent
+                            },                            
+                            {
+                                path: ':id',
+                                component: CompanyDetailComponent,
+                                children: [
+                                    {
+                                        path: 'overview',
+                                        component: CompanyDetailComponent
+                                    },
+                                    {
+                                        path: 'jobs',
+                                        component: CompanyDetailComponent
+                                    }
+                                ]
+                            },
+                        ]
+                    },
+                    {
+                        path: 'profile',
+                        component: AuthUserComponent
+                    }
+                ]
             },
             {
                 path: 'sign-up',

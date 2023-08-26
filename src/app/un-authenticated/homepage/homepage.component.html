@@ -1,11 +1,17 @@
-<div class="navbar flex justify-content-center align-items-center w-screen">
+<div class="navbar flex justify-content-center align-items-center">
     <app-navbar></app-navbar>
 </div>
 
-<div class="w-screen flex flex-column justify-content-center align-items-center footer">
+<div class="content flex justify-content-center">
+    <div>
+        <app-content></app-content>
+    </div>
+</div>
+
+<div class="flex flex-column justify-content-center align-items-center footer">
     <app-footer></app-footer>
 </div>
 
-<div class="flex justify-content-center align-items-center w-screen footer-copyright">
+<div class="flex justify-content-center align-items-center footer-copyright">
     <p [innerHTML]="'label.powered_by_quang_qui' | translate : { year: parseYear()}"></p>
 </div>

@@ -1,0 +1,74 @@
+<div class="w-full flex justify-content-center">
+    <div class="job-detail">
+        <div class="flex align-items-center justify-content-center" style="margin-bottom: 30px;">            
+            <div class="logo" *ngIf="!job?.companyAvatar">
+                <img src="../../../../../../assets/images/TopWork-logo.png" width="100%">
+            </div>
+
+            <img *ngIf="job?.companyAvatar" [src]="job?.companyAvatar" class="logo">
+
+            <h3>{{ job?.jobName }}</h3>
+        </div>
+
+        <div class="flex flex-column job-detail-info">
+            <div class="flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+                <img src="../../../../../../assets/images/icons/briefcase.svg" 
+                    style="margin-right: 10px;" [width]="24">
+                <span class="font-size-13">{{ job?.jobPosition }}</span>
+            </div>
+
+            <div class="flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+                <img src="../../../../../../assets/images/icons/dollar-circle.svg" 
+                    style="margin-right: 10px;" [width]="24">
+                <span class="font-size-13">{{ parseSalary(job?.salary || '') }}</span>
+            </div>
+
+            <div class="flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+                <img src="../../../../../../assets/images/icons/clock.svg" 
+                    style="margin-right: 10px;" [width]="24">
+                <span class="font-size-13">{{ parseDate(job?.expiryDate || '') }}</span>
+            </div>
+
+            <div class="flex justify-content-start align-items-center">
+                <img src="../../../../../../assets/images/icons/location.svg" 
+                    style="margin-right: 10px;" [width]="24">
+                <span class="font-size-13">{{ job?.address ? job?.address : job?.city }}</span>
+            </div>
+        </div>
+
+        <div class="flex flex-column align-items-start" style="margin-bottom: 20px;">
+            <h3 style="margin-bottom: 10px;">{{ 'label.description' | translate }}</h3>
+            <p [innerHTML]="job?.description"></p>
+        </div>
+
+        <div class="flex flex-column align-items-start" style="margin-bottom: 20px;">
+            <h3 style="margin-bottom: 10px;">{{ 'label.required' | translate }}</h3>
+            <p [innerHTML]="job?.required"></p>
+        </div>
+
+        <div class="flex flex-column align-items-start" style="margin-bottom: 30px;">
+            <h3 style="margin-bottom: 10px;">{{ 'label.benefit' | translate }}</h3>
+            <p [innerHTML]="job?.benefited"></p>
+        </div>
+
+        <div class="apply flex justify-content-center align-items-center">
+            <p-button class="btn-edit" [label]="'label.back' | translate"
+                (onClick)="onBack()"></p-button>
+            <p-button [label]="(isApplied ? 'label.applied' : 'label.apply') | translate" 
+                [ngClass]="isApplied ? 'btn-edit' : ''" 
+                (onClick)="onApply(job?.id || jobId)"></p-button>
+        </div>
+    </div>
+</div>
+
+<p-dialog class="custom-dialog" [(visible)]="isLogin" (onHide)="isLogin = false" [draggable]="false"
+    [header]="'button.sign_in' | translate" *ngIf="!isMobile">
+    <div style="padding-top: 30px;">
+        <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (onClose)="onClose($event)"></app-sign-in>
+    </div>
+</p-dialog>
+
+<p-sidebar [(visible)]="isLogin" (onHide)="isLogin = false"
+    *ngIf="isMobile" [fullScreen]="true">
+    <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (onClose)="onClose($event)"></app-sign-in>
+</p-sidebar>

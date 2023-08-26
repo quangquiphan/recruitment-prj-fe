@@ -1,0 +1,12 @@
+<div class="company">
+    <div class="company-item" *ngFor="let c of companies" 
+        [routerLink]="'/company/' + c.id + '/overview'">
+        <div class="c-avt" *ngIf="!c?.avatar">
+            <img src="../../../../../assets/images/TopWork-logo.png" width="100%">
+        </div>
+
+        <img [src]="c?.avatar" *ngIf="c?.avatar">
+
+        <h4 class="text-center">{{ c?.companyName }}</h4>
+    </div>
+</div>

@@ -1,48 +1,75 @@
 <div *ngIf="!isMobileAndTablet" class="nav flex align-items-center justify-content-around">
     <div class="flex">
-        <img src="../../../assets/images/TopWork-logo.png" class="logo" [width]="130">
+        <img src="../../../assets/images/TopWork-logo.png" class="logo cursor-pointer" 
+            [routerLink]="''" [width]="130">
 
         <ul class="flex align-items-center">
-            <li class="item">{{ 'label.jobs' | translate }}</li>
-            <li class="item">{{ 'label.company' | translate }}</li>
+            <li class="item cursor-pointer" [routerLink]="'/jobs'">
+                {{ 'label.jobs' | translate }}
+            </li>
+            
+            <li class="item cursor-pointer" [routerLink]="'/company'">
+                {{ 'label.company' | translate }}
+            </li>
         </ul>
     </div>
 
     <div class="flex align-items-center">
         <div (click)="init();menu.toggle($event)"  
             class="flex justify-content-center align-items-center cursor-pointer">
-            <img src="../../../assets/images/icons/user-bold.svg" *ngIf="!authUser?.avatar" class="avatar" width="100%">
+            <img src="../../../assets/images/icons/user-bold.svg" *ngIf="!authUser?.avatar && !authUser?.id" 
+                class="avatar" width="100%">
 
-            <img [src]="authUser?.avatar" *ngIf="authUser?.avatar" class="avatar" width="100%">
+            <div class="avatar" *ngIf="authUser?.id && !authUser?.avatar">
+                <img src="../../../assets/images/TopWork-logo.png" width="100%">
+            </div>
+
+            <img [src]="authUser?.avatar" *ngIf="authUser?.avatar && authUser?.id" 
+                class="avatar" width="100%">
         </div>
 
-        <p-dropdown [options]="languages" [optionLabel]="'label'" [optionValue]="'id'"
-            (onChange)="onLoadLang($event)" [(ngModel)]="lang"></p-dropdown>
+        <p-dropdown [options]="languages" (onChange)="onLoadLang($event)" 
+            [(ngModel)]="langSelected" [optionLabel]="'icon'">
+            <ng-template pTemplate="selectedItem">
+                <div class="flex align-items-center gap-2" *ngIf="langSelected">
+                    <img [src]="langSelected.icon" [width]="24">
+                </div>
+            </ng-template>
+            <ng-template let-lang pTemplate="item">
+                <div class="flex align-items-center gap-2">
+                    <img [src]="lang.icon" [width]="24">
+                </div>
+            </ng-template>
+        </p-dropdown>
     </div>
 </div>
 
 <div *ngIf="isMobileAndTablet" class="nav-mobile flex justify-content-around align-items-center relative">
-    <img src="../../../assets/images/icons/menu.svg" (click)="isShowMenu = true" [width]="25">
+    <img src="../../../assets/images/icons/menu.svg" class="cursor-pointer" (click)="isShowMenu = true" [width]="25">
     
-    <img src="../../../assets/images/TopWork-logo.png" [width]="130">
+    <img src="../../../assets/images/TopWork-logo.png" class="cursor-pointer" [width]="130" [routerLink]="''">
 </div>
 
 <p-sidebar [(visible)]="isShowMenu" position="left" class="menu-bar">
     <ng-template pTemplate="content">
         <div class="flex h-full flex-column justify-content-between">
             <div>
-                <div class="flex justify-content-center w-full" style="margin-bottom: 30px;">
-                    <img src="../../../assets/images/TopWork-logo.png" 
-                        [width]="150">
+                <div class="flex justify-content-center w-full cursor-pointer" style="margin-bottom: 30px;">
+                    <img src="../../../assets/images/TopWork-logo.png" [routerLink]="''"
+                        [width]="150" (click)="isShowMenu = false">
                 </div>
                 
                 <ul>
-                    <li class="w-full flex justify-content-start align-items-center">
+                    <li class="w-full flex justify-content-start align-items-center cursor-pointer" 
+                        [routerLink]="'/jobs'" (click)="isShowMenu = false">
                         <img src="../../../assets/images/icons/briefcase.svg" style="margin-right: 15px;">
-                        <span class="font-size-14">{{ 'label.jobs' | translate }}</span>
+                        <span class="font-size-14">
+                            {{ 'label.jobs' | translate }}
+                        </span>
                     </li>
         
-                    <li class="w-full flex justify-content-start align-items-center">
+                    <li class="w-full flex justify-content-start align-items-center cursor-pointer" 
+                        [routerLink]="'/company'" (click)="isShowMenu = false">
                         <img src="../../../assets/images/icons/buliding.svg" style="margin-right: 15px;">
                         <span class="font-size-14">{{ 'label.company' | translate }}</span>
                     </li>
@@ -50,19 +77,20 @@
         
                 <div>
                     <div style="padding: 10px 20px;" (click)="isLogin = true"
-                        *ngIf="!authUser?.id" class="flex justify-content-start align-items-center">
+                        *ngIf="!authUser?.id" class="flex justify-content-start align-items-center cursor-pointer">
                         <img src="../../../assets/images/icons/user-bold.svg" [width]="25" 
                             style="border: 1px solid var(--primary-700); border-radius: 50%; margin-right: 15px;">
                         <span class="font-size-14">{{ 'button.sign_in' | translate }}</span>
                     </div>
         
                     <div *ngIf="authUser?.id" style="padding: 10px 20px;" (click)="onShowSubmenu($event)"
-                        class="w-full flex justify-content-between align-items-center">
+                        class="w-full flex justify-content-between align-items-center cursor-pointer">
                         <div class="flex justify-content-center align-items-center">
-                            <img [src]="authUser?.avatar" *ngIf="authUser?.avatar" [width]="25" class="avatar-mobile">
+                            <img [src]="authUser?.avatar" *ngIf="authUser?.avatar" [width]="25" 
+                                class="avatar-mobile cursor-pointer">
                         
-                            <div class="avatar-mobile flex justify-content-center align-items-center"
-                                *ngIf="!authUser?.avatar">
+                            <div *ngIf="!authUser?.avatar"
+                                class="avatar-mobile flex justify-content-center align-items-center cursor-pointer">
                                 <img src="../../../assets/images/TopWork-logo.png" width="100%">
                             </div>
         
@@ -73,24 +101,31 @@
                             [ngClass]="isShowSubMenu ? 'img' : ''" [width]="24">
                     </div>
         
-                    <div *ngIf="authUser?.id && isShowSubMenu" style="padding: 10px 30px;" class="w-full flex justify-content-between align-items-center">
+                    <div *ngIf="authUser?.id && isShowSubMenu" style="padding: 10px 30px;" 
+                        class="w-full flex justify-content-between align-items-center">
                         <ul>
-                            <li class="w-full flex justify-content-start align-items-center">
+                            <li class="w-full flex justify-content-start align-items-center cursor-pointer"
+                                [routerLink]="'/profile'">
                                 <i class="pi pi-user" style="margin-right: 10px;"></i>
                                 <span class="font-size-14">{{ 'label.profile' | translate }}</span>
                             </li>
         
-                            <li class="w-full flex justify-content-start align-items-center" (click)="isChangePassword = true">
+                            <li class="w-full flex justify-content-start align-items-center cursor-pointer" 
+                                (click)="isChangePassword = true">
                                 <i class="pi pi-eye" style="margin-right: 10px;"></i>
                                 <span class="font-size-14">{{ 'label.change_password' | translate }}</span>
                             </li>
         
-                            <li class="w-full flex justify-content-start align-items-center">
-                                <i class="pi pi-upload" style="margin-right: 10px;"></i>
-                                <span class="font-size-14">{{ 'label.upload_cv' | translate }}</span>
+                            <li class="w-full flex justify-content-start align-items-center cursor-pointer">
+                                <label for="cv-mobile" class="w-full flex justify-content-start align-items-center">
+                                    <i class="pi pi-upload" style="margin-right: 10px;"></i>
+                                    <span class="font-size-14">{{ 'label.upload_cv' | translate }}</span>
+                                </label>
+                                <input type="file" id="cv-mobile" [hidden]="true" (change)="selectedCV($event)">
                             </li>
         
-                            <li class="w-full flex justify-content-start align-items-center">
+                            <li class="w-full flex justify-content-start align-items-center cursor-pointer" 
+                                (click)="logout()">
                                 <i class="pi pi-sign-out" style="margin-right: 10px;"></i>
                                 <span class="font-size-14">{{ 'button.sign_out' | translate }}</span>
                             </li>
@@ -100,8 +135,19 @@
             </div>
     
             <div class="w-full">
-                <p-dropdown [options]="languages" [optionLabel]="'label'" [optionValue]="'id'"
-                    (onChange)="onLoadLang($event)" [(ngModel)]="lang"></p-dropdown>
+                <p-dropdown [options]="languages" (onChange)="onLoadLang($event)" 
+                    [(ngModel)]="langSelected" [optionLabel]="'icon'">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="flex align-items-center gap-2" *ngIf="langSelected">
+                            <img [src]="langSelected.icon" [width]="24">
+                        </div>
+                    </ng-template>
+                    <ng-template let-lang pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                            <img [src]="lang.icon" [width]="24">
+                        </div>
+                    </ng-template>
+                </p-dropdown>
             </div>
         </div>
     </ng-template>
@@ -109,13 +155,13 @@
 
 <p-sidebar [(visible)]="isLogin" (onHide)="isLogin = false"
     *ngIf="isMobile" [fullScreen]="true">
-    <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (isClose)="onClose($event)"></app-sign-in>
+    <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (onClose)="onClose($event)"></app-sign-in>
 </p-sidebar>
 
 <p-dialog class="custom-dialog" [(visible)]="isLogin" (onHide)="isLogin = false" [draggable]="false"
     [header]="'button.sign_in' | translate" *ngIf="!isMobile">
     <div style="padding-top: 30px;">
-        <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (isClose)="onClose($event)"></app-sign-in>
+        <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (onClose)="onClose($event)"></app-sign-in>
     </div>
 </p-dialog>
 
@@ -156,3 +202,13 @@
 <div class="toggle-menu">
     <p-menu [model]="items" #menu [popup]="true"></p-menu>
 </div>
+
+
+<p-dialog *ngIf="!isMobileAndTablet" class="custom-dialog" [(visible)]="isUploadCV" (onHide)="isUploadCV = false" [draggable]="false"
+    [header]="'label.upload_cv' | translate">
+    <div class="flex justify-content-center align-items-center" style="padding-top: 30px; min-width: 300px;">
+        <label for="cv" class="cursor-pointer">{{ 'label.upload_cv' | translate }}</label>
+        <input type="file" id="cv" [hidden]="true" (change)="selectedCV($event)">
+    </div>
+</p-dialog>
+

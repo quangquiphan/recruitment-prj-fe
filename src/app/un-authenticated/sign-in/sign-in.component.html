@@ -13,7 +13,7 @@
             <label for="pwd" class="font-size-14 font-bold font-color-primary" style="margin-bottom: 2px;">
                 {{ 'label.password' | translate }}
             </label>
-            <p-password id="pwd" formControlName="passwordHash" [toggleMask]="true" class="w-full"></p-password>
+            <p-password inputId="pwd" formControlName="passwordHash" [toggleMask]="true" class="w-full"></p-password>
 
             <a class="font-size-13 forgot-pwd cursor-pointer" [routerLink]="'/forgot-password'">
                 {{ 'label.forgot_password' | translate }}
@@ -24,7 +24,7 @@
              style="margin-bottom: 25px;">
             <div class="flex align-items-end">
                 <p-checkbox formControlName="keepLogin" [binary]="true" inputId="keepLogin"
-                    id="keepLogin"></p-checkbox>
+                    class="keepLogin"></p-checkbox>
                 <label for="keepLogin" class="font-size-14 font-color-primary">
                     {{ 'label.keep_login' | translate }}
                 </label>

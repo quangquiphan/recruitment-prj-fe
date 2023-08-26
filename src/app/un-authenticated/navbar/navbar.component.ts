@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem, MessageService } from 'primeng/api';
@@ -6,6 +6,9 @@ import { AuthUser } from 'src/app/model/auth-user.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import AppConstant from 'src/app/utilities/app-constant';
 import AppUtil from 'src/app/utilities/app-util';
+import { JobDetailComponent } from '../homepage/content/jobs/job-detail/job-detail.component';
+import { UserService } from 'src/app/services/user.service';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-navbar',
@@ -25,10 +28,12 @@ export class NavbarComponent implements OnInit{
   item: MenuItem[] = [];
   items: MenuItem[] = [];
   languages: any[] = [];
-  lang: string = 'en';
+  isUploadCV: boolean = false;
+  langSelected: any = this.languages[0];
 
   constructor(
     private fb: FormBuilder,
+    private userService: UserService,
     private messageService: MessageService,
     private translateService: TranslateService,
     private authenticatService: AuthenticateService,
@@ -49,13 +54,27 @@ export class NavbarComponent implements OnInit{
     })
   }
 
-  ngOnInit(): void {
-    this.init();
+  ngOnInit(): void { 
     this.authUser = this.authenticatService.authUser;
+    this.init();
     this.onResize();
+    
   }
 
   init() {
+    this.languages = [
+      {
+        id: 'en',
+        icon: '../../../assets/images/icons/united-kingdom.svg'
+      },
+      {
+        id: 'vn',
+        icon: '../../../assets/images/icons/vietnam.svg'
+      }
+    ];
+
+    this.onShowLang();
+
     this.items = [
       {
         label: this.parseLable('button.sign_in'),
@@ -68,6 +87,7 @@ export class NavbarComponent implements OnInit{
       {
         label: this.parseLable('label.profile'),
         icon: 'pi pi-user',
+        routerLink: '/profile',
         visible: this.checkVisible(this.authUser),
         command: () => {}
       },
@@ -83,7 +103,9 @@ export class NavbarComponent implements OnInit{
         label: this.parseLable('label.upload_cv'),
         icon: 'pi pi-upload',
         visible: this.checkVisible(this.authUser),
-        command: () => {}
+        command: () => {
+          this.isUploadCV = true;
+        }
       },
       {
         label: this.parseLable('button.sign_out'),
@@ -94,17 +116,33 @@ export class NavbarComponent implements OnInit{
         }
       },
     ];
+  }
 
-    this.languages = [
-      {
-        id: 'en',
-        label: this.translateService.instant('label.english')
-      },
-      {
-        id: 'vn',
-        label: this.translateService.instant('label.vietnamese')
+  selectedCV(ev: any) {
+    if (ev) {
+      let file = ev.target.files[0];
+      return this.uploadCV(file);
+    }
+    return;
+  }
+
+  uploadCV(file: any) {
+    return this.userService.uploadCV(this.authUser?.id || '', file).subscribe({
+      next: (event : any) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.isUploadCV = false;
+          window.location.reload();
+        }
       }
-    ]
+    })
+  }
+
+  onShowLang() {
+    this.languages.filter((e) => {
+      if (e.id === this.translateService.getDefaultLang()) {
+        return this.langSelected = e;
+      }
+    })
   }
 
   onCancel() {
@@ -114,9 +152,8 @@ export class NavbarComponent implements OnInit{
 
   onLoadLang(ev: any) {
     if (ev) {
-      this.translateService.setDefaultLang(ev.value);
-      this.init();
-      console.log(this.translateService.instant('label.english'));
+      this.translateService.setDefaultLang(ev.value.id);
+      this.langSelected = ev.value;
     }
   }
 
@@ -166,7 +203,9 @@ export class NavbarComponent implements OnInit{
           this.authenticatService.doResetAuthUser();
           this.authenticatService.setAuthUser(undefined)
           this.authUser = undefined;
-          this.isVisible = true;         
+          this.isVisible = true;
+          this.isShowMenu = false;
+          window.location.reload();
         }
       }
     )
@@ -174,9 +213,11 @@ export class NavbarComponent implements OnInit{
 
   onClose(ev: any) {
     if (ev) {
-      this.isLogin = false;
-      this.authUser  = this.authenticatService.authUser;
+      this.isShowMenu = false;
       this.isVisible = false;
+      this.authUser  = ev;
+      this.isLogin = false;
+      window.location.reload();
     }
   }
 

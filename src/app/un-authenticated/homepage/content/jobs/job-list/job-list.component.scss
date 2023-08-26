@@ -1,0 +1,119 @@
+.search-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.jobs {
+    width: 100%;
+    padding: 0 10px;
+
+    .jobs-items {
+        border: 1px solid var(--primary-100);
+        border-radius: 6px;
+        padding: 20px 30px 15px;
+        background-color: var(--primary-50);
+        min-width: 320px;
+        max-width: 800px;
+        width: 100%;
+        margin-bottom: 20px;
+    
+        .c-avt {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid var(--primary-700);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+        }
+    }
+
+    .jobs-items:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    border: 1px solid var(--primary-100);
+}
+
+.search-control {
+    justify-content: space-between;
+    align-items: center;
+
+    p-dropdown{
+        margin-right: 20px !important;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .items {
+        min-width: 240px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    :host::ng-deep {
+        .p-carousel .p-carousel-content .p-carousel-prev, .p-carousel .p-carousel-content .p-carousel-next {
+            display: none !important;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .search-control {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        #search, .p-dropdown {
+            margin-right: 0px !important;
+            width: 100%;
+            max-width: unset !important;
+            margin-bottom: 20px;
+        }
+
+        p-dropdown {
+            margin-right: 0 !important;
+            width: 100%;
+        }
+    }
+
+    :host::ng-deep {
+        .p-dropdown {
+            margin-bottom: 20px !important;
+        }
+    }
+}
+
+:host::ng-deep {
+    .p-chip {
+        margin-bottom: 5px;
+        margin-right: 10px;
+    }
+
+    #search, .p-dropdown {
+        margin-right: 20px;
+        border: unset;
+        border-bottom: 2px solid var(--primary-700);
+        border-radius: 0;
+        padding-left: 50px;
+    }
+
+    .p-dropdown {
+        padding-left: unset !important;
+        margin-right: unset !important;
+    }
+
+    .p-carousel-container {
+        min-height: 245px !important;
+    }
+}

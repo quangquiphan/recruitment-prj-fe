@@ -1,0 +1,98 @@
+
+<div class="flex justify-content-center flex-column align-items-center jobs">
+    <div class="w-full flex justify-content-center align-items-center" style="margin-bottom: 20px;">
+        <div class="relative search-control flex" style="max-width: 600px; width: 100%;">
+            <img src="../../../../../../assets/images/icons/search.svg" class="search-icon" [width]="24">
+            <input type="text" pInputText style="margin-right: 20px; max-width: 300px;" id="search" [(ngModel)]="keyword"
+                [placeholder]="'message.search_by_job_name_job_position_city' | translate">
+            <p-dropdown [options]="cities" [optionLabel]="'name'"
+                [optionValue]="'name'" (onChange)="searchJobs($event)" [filter]="true"
+                [placeholder]="'message.choose_city' | translate"></p-dropdown>
+            <p-button [label]="'button.search' | translate" (onClick)="searchJobs()"></p-button>
+        </div>
+    </div>
+
+    <div style="margin-bottom: 20px; padding-left: 20px;" class="flex justify-content-start">
+        <h3 *ngIf="!isNavigateFromCompany && !isSearch">
+            {{ (authUser?.id ? 'label.recommend' : 'label.jobs') | translate }} 
+         </h3>
+
+         <h3 *ngIf="isSearch">
+            {{ ( showJobs.length > 1 ? 'label.results_count_job' : 'label.result_count_job') | translate 
+                : {number: showJobs.length} }}
+         </h3>
+    </div>
+    <div class="jobs-items" *ngFor="let j of showJobs" [routerLink]="'/jobs/' + j.id">
+        <div class="flex justify-content-between align-items-center">
+            <div class="flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+                <div class="c-avt" *ngIf="!j.companyAvatar">
+                    <img src="../../../../../assets/images/TopWork-logo.png" width="100%">
+                </div>
+            
+                <img *ngIf="j.companyAvatar" [src]="j.companyAvatar">
+        
+                <div class="flex flex-column justify-content-center align-items-start">
+                    <h3 style="margin-bottom: 3px;">Java developer</h3>
+                    <i class="font-size-12">{{ j.companyName }}</i>
+                </div>
+            </div>
+
+            <div class="flex align-items-center">
+                <img src="../../../../../assets/images/icons/clock.svg" 
+                    style="margin-right: 10px;" [width]="24">
+                <span>
+                    {{ parseDate(j.expiryDate) }}
+                </span>
+            </div>
+        </div>
+    
+        <div class="flex align-items-center" style="margin-bottom: 10px;">
+            <img src="../../../../../assets/images/icons/location.svg" [width]="24" 
+                style="margin-right: 10px;">
+            <div class="flex align-items-center" style="padding-top: 4px;">
+                <p>{{ j.city }}</p>
+            </div>
+        </div>
+    
+        <div class="flex align-items-center" style="margin-bottom: 10px;">
+            <img src="../../../../../assets/images/icons/dollar-circle.svg" [width]="24" 
+                style="margin-right: 10px;">
+            <div class="flex align-items-center" style="padding-top: 4px;">
+                <p>{{ parseSalary(j.salary) }}</p>
+            </div>
+        </div>
+    
+        <div class="flex flex-wrap">
+            <p-chip *ngFor="let s of j.skills">{{ s.name }}</p-chip>
+            <p-chip *ngFor="let l of j.languages">{{ l.name }}</p-chip>
+        </div>
+    </div>
+    <div *ngIf="showJobs.length < totalElements" (click)="viewMore()" 
+        class="font-size-13" style="margin-bottom: 30px;">
+        {{ 'label.view_more' | translate }}
+    </div>
+
+    <h3 class="text-center" style="margin-bottom: 20px;">
+        {{ 'label.top_company' | translate }}
+    </h3>
+    <p-carousel [value]="companies" [numVisible]="3" [numScroll]="3" [circular]="false" 
+        [responsiveOptions]="responsiveOptions" [autoplayInterval]="5000">
+        <ng-template let-c pTemplate="item">
+            <div class="border-1 surface-border border-round m-2 text-center py-5 px-3 items" 
+                style="min-height: 100%;" [routerLink]="'/company/' + c.id">
+                <div class="w-full flex justify-content-center">
+                    <img [src]="c.avatar" *ngIf="c.avatar" />
+    
+                    <div class="avatar" *ngIf="!c.avatar">
+                        <img src="../../../../../../assets/images/TopWork-logo.png" width="100%"/>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="mb-1" style="min-width: fit-content;">{{ c.companyName }}</h4>
+                    <h6>{{ c.email }}</h6>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+</div>
+

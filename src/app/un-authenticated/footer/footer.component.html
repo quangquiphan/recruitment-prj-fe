@@ -1,13 +1,18 @@
 <div class="footer">
     <div class="footer-img flex align-items-center">
-        <img src="../../../assets/images/TopWork-logo.png" [width]="190">
+        <img src="../../../assets/images/TopWork-logo.png" [routerLink]="''" [width]="190">
     </div>
 
     <div class="footer-menu flex flex-column">
         <h2 style="margin-bottom: 20px;">{{ 'label.menu' | translate }}</h2>
         <ul>
-            <li class="font-size-14" style="margin-bottom: 10px;">{{ 'label.jobs' | translate }}</li>
-            <li class="font-size-14">{{ 'label.company' | translate }}</li>
+            <li class="font-size-14" style="margin-bottom: 10px;" [routerLink]="'/jobs'">
+                {{ 'label.jobs' | translate }}
+            </li>
+            
+            <li class="font-size-14" [routerLink]="'/company'">
+                {{ 'label.company' | translate }}
+            </li>
         </ul>
     </div>
 

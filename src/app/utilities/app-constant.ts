@@ -32,9 +32,9 @@ const AppConstant = Object.freeze({
       IN_ACTIVE: "IN_ACTIVE"
     },
     JOB_STATUS: {
-      MATCHES: "matches",
-      APPLIED: "applied",
-      REJECTED: "rejected",
+      MATCHES: "MATCHES",
+      APPLIED: "APPLIED",
+      REJECTED: "REJECTED",
     },
     USER_ROLE: {
       ADMIN: "ADMIN",
@@ -53,6 +53,12 @@ const AppConstant = Object.freeze({
     ACCOUNT_TYPE: {
       USER: "CANDIDATE"
     },
+    DATE_FORMAT: {
+      POST: "YYYY-MM-DD",
+      MONTH_YEAR: "MM/YYYY",
+      GET: "DD-MM-YYYY",
+      SHORT_DATE: "DD/MM/YYYY"
+    }
 });
 
 export default AppConstant;

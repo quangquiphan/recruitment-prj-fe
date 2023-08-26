@@ -1,0 +1,42 @@
+<div class="w-full flex company-info">
+    <div>
+        <div style="margin-bottom: 20px;" class="overview">
+            <h3>{{ 'label.overview' | translate }}</h3>
+            <p [innerHTML]="company?.overview"></p>
+        </div>
+
+        <div class="flex align-items-center justify-content-start" 
+            style="margin-bottom: 10px;" *ngIf="company?.size">
+            <img src="../../../../../../../assets/images/icons/users.svg"
+                style="margin-right: 10px;" [width]="24">
+            <span>{{ parseSize(company?.size || '') }}</span>
+        </div>
+
+        <div class="flex align-items-center justify-content-start" 
+            style="margin-bottom: 10px;" *ngIf="company?.phoneNumber">
+            <img src="../../../../../../../assets/images/icons/call.svg"
+                style="margin-right: 10px;" [width]="24">
+            <span>{{ company?.phoneNumber }}</span>
+        </div>
+
+        <div class="flex align-items-center justify-content-start" 
+            style="margin-bottom: 10px;" *ngIf="company?.email">
+            <img src="../../../../../../../assets/images/icons/sms.svg"
+                style="margin-right: 10px;" [width]="24">
+            <span>{{ company?.email }}</span>
+        </div>
+
+        <div class="flex align-items-center justify-content-start" 
+            style="margin-bottom: 10px;" *ngIf="company?.website">
+            <img src="../../../../../../../assets/images/icons/global.svg"
+                style="margin-right: 10px;" [width]="24">
+            <span>{{ company?.website }}</span>
+        </div>
+
+        <div class="flex align-items-center justify-content-start" *ngIf="company?.address">
+            <img src="../../../../../../../assets/images/icons/location.svg"
+                style="margin-right: 10px;" [width]="24">
+            <span>{{ company?.address }}</span>
+        </div>
+    </div>
+</div>

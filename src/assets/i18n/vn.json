@@ -22,7 +22,21 @@
         "powered_by_quang_qui": "© {{year}} <b>Bản quyền</b> thuộc Quang Quí",
         "old_password": "Mật khẩu củ",
         "new_password": "Mật khẩu mới",
-        "confirm_new_password": "Nhập lại mật khẩu"
+        "confirm_new_password": "Nhập lại mật khẩu",
+        "menu": "Menu",
+        "contact": "Liên hệ",
+        "overview": "Tổng quát",
+        "num_day": "{{number}} ngày",
+        "num_days": "{{number}} ngày",
+        "num_hour": "{{number}} giờ",
+        "num_hours": "{{number}} giờ",
+        "num_minute": "{{number}} phút",
+        "num_minutes": "{{number}} phút",
+        "description": "Mô tả",
+        "benefit": "Quyền lợi",
+        "required": "Yêu cầu ứng viên",
+        "apply": "Ứng tuyển",
+        "back": "Trở về"
     },
     "button": {
         "sign_in": "Đăng nhập",

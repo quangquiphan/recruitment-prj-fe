@@ -29,7 +29,7 @@ export class AuthGuard implements CanActivate {
                 },
                 (error: any) => {
                     this.authenticateService.clearSession();
-                    this.router.navigate(['/home']).then((r) => {});
+                    this.router.navigate(['/jobs']).then((r) => {});
                     return false;
                 }
             )

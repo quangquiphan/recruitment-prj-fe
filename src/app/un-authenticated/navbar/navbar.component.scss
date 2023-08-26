@@ -1,5 +1,4 @@
 .nav {
-    max-width: 1400px;
     min-width: 801px;
 
     .logo {
@@ -18,6 +17,9 @@
         border-radius: 50%;
         margin-right: 20px;
         border: 1px solid var(--primary-700);
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 }
 
@@ -89,9 +91,11 @@
 
     .p-dropdown {
         border: unset !important;
-        border-bottom: 2px solid var(--blue-700) !important;
-        border-radius: 0 !important;
         background-color: var(--primary-50) !important;
+    }
+
+    .p-dropdown .p-dropdown-trigger {
+        width: 1.5rem !important;
     }
 
     .p-dropdown:focus-visible {
