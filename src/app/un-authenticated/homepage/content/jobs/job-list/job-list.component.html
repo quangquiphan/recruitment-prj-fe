@@ -29,10 +29,10 @@
                     <img src="../../../../../assets/images/TopWork-logo.png" width="100%">
                 </div>
             
-                <img *ngIf="j.companyAvatar" [src]="j.companyAvatar">
+                <img *ngIf="j.companyAvatar" [src]="j.companyAvatar" class="c-avt">
         
                 <div class="flex flex-column justify-content-center align-items-start">
-                    <h3 style="margin-bottom: 3px;">Java developer</h3>
+                    <h3 style="margin-bottom: 3px;">{{ j.jobName }}</h3>
                     <i class="font-size-12">{{ j.companyName }}</i>
                 </div>
             </div>
@@ -81,7 +81,7 @@
             <div class="border-1 surface-border border-round m-2 text-center py-5 px-3 items" 
                 style="min-height: 100%;" [routerLink]="'/company/' + c.id">
                 <div class="w-full flex justify-content-center">
-                    <img [src]="c.avatar" *ngIf="c.avatar" />
+                    <img [src]="c.avatar" *ngIf="c.avatar" class="avatar" />
     
                     <div class="avatar" *ngIf="!c.avatar">
                         <img src="../../../../../../assets/images/TopWork-logo.png" width="100%"/>

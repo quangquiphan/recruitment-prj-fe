@@ -68,15 +68,15 @@ export class JobListComponent implements OnInit{
     if (!this.isNavigateFromCompany) {
       if (this.authUser?.id) {
         this.paging.major = this.authenticateService.authUser?.major;
-        this.getJobsRecomment(this.paging);        
-        this.getListCompany();
+        this.getJobsRecomment(this.paging);  
       } else {
         this.getAllJobs();
-        this.getListCompany();
       }
     } else {
       this.getJobsByCompanyid();
-    }
+    }      
+    
+    this.getListCompany();
   }
 
   getJobsRecomment(paging: any) {
@@ -88,8 +88,9 @@ export class JobListComponent implements OnInit{
           this.totalElements = res.data.length;
           this.first = 0;          
           
-          for (let index = this.first; index < this.jobs.length; index++) {
-            if (index >= this.first && index < this.paging.pageSize * this.paging.pageNumber) {
+          for (let index = 0; index < this.jobs.length; index++) {
+            if (index >= (this.paging.pageNumber - 1) * this.paging.pageSize 
+              && index < this.paging.pageSize * this.paging.pageNumber) {
               this.showJobs.push(this.jobs[index]);
             }
           }
@@ -100,10 +101,10 @@ export class JobListComponent implements OnInit{
 
   viewMore() {
     this.paging.pageNumber += 1;
-    this.first += this.paging.pageSize;
     
-    for (let index = this.first; index < this.jobs.length; index++) {
-      if (index >= this.first && index < this.paging.pageSize * this.paging.pageNumber) {
+    for (let index = 0; index < this.jobs.length; index++) {
+      if (index >= (this.paging.pageNumber - 1) * this.paging.pageSize 
+          && index < this.paging.pageSize * this.paging.pageNumber) {
         this.showJobs.push(this.jobs[index]);
       }
     }
@@ -118,8 +119,9 @@ export class JobListComponent implements OnInit{
           this.totalElements = res.data.length;
           this.first = 0;
           
-          for (let index = this.first; index < this.jobs.length; index++) {
-            if (index >= this.first && index < this.paging.pageSize * this.paging.pageNumber) {
+          for (let index = 0; index < this.jobs.length; index++) {
+            if (index >= (this.paging.pageNumber - 1) * this.paging.pageSize 
+                && index < this.paging.pageSize * this.paging.pageNumber) {
               this.showJobs.push(this.jobs[index]);
             }
           }
@@ -146,8 +148,9 @@ export class JobListComponent implements OnInit{
           this.totalElements = res.data.length;
           this.first = 0;
           
-          for (let index = this.first; index < this.jobs.length; index++) {
-            if (index >= this.first && index < this.paging.pageSize * this.paging.pageNumber) {
+          for (let index = 0; index < this.jobs.length; index++) {
+            if (index >= (this.paging.pageNumber - 1) * this.paging.pageSize 
+                && index < this.paging.pageSize * this.paging.pageNumber) {
               this.showJobs.push(this.jobs[index]);
             }
           }
@@ -165,8 +168,9 @@ export class JobListComponent implements OnInit{
           this.totalElements = res.data.length;
           this.first = 0;
           
-          for (let index = this.first; index < this.jobs.length; index++) {
-            if (index >= this.first && index < this.paging.pageSize * this.paging.pageNumber) {
+          for (let index = 0; index < this.jobs.length; index++) {
+            if (index >= (this.paging.pageNumber - 1) * this.paging.pageSize 
+                && index < this.paging.pageSize * this.paging.pageNumber) {
               this.showJobs.push(this.jobs[index]);
             }
           }
