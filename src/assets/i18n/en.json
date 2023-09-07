@@ -107,8 +107,9 @@
         "add_project_successfully": "Add project successfully!",
         "edit_project_failed": "Edit project failed!",
         "edit_project_successfully": "Edit project successfully!",
-        "search_by_job_name_job_position_city": "Search by job name, job position, and city",
-        "choose_city": "Choose city",
+        "search_by_job_name_job_position_city": "Search by job name, and job position",
+        "choose_city": "City",
+        "choose_salary": "Salary",
         "apply_successfully": "Apply successfully!",
         "apply_failed": "Apply failed!"
     },
@@ -122,7 +123,8 @@
         "delete": "Delete",
         "submit": "Submit",
         "new": "New",
-        "search": "Search"
+        "search": "Search",
+        "filter": "Filter"
     },
     "SIZE": {
         "FORM_11_TO_25": "11 - 25",

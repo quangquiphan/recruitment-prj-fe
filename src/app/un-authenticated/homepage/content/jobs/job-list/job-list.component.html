@@ -3,24 +3,24 @@
     <div class="w-full flex justify-content-center align-items-center" style="margin-bottom: 20px;">
         <div class="relative search-control flex" style="max-width: 600px; width: 100%;">
             <img src="../../../../../../assets/images/icons/search.svg" class="search-icon" [width]="24">
-            <input type="text" pInputText style="margin-right: 20px; max-width: 300px;" id="search" [(ngModel)]="keyword"
+            <input type="text" pInputText style="margin-right: 20px;" id="search" [(ngModel)]="keyword"
                 [placeholder]="'message.search_by_job_name_job_position_city' | translate">
-            <p-dropdown [options]="cities" [optionLabel]="'name'"
-                [optionValue]="'name'" (onChange)="searchJobs($event)" [filter]="true"
-                [placeholder]="'message.choose_city' | translate"></p-dropdown>
             <p-button [label]="'button.search' | translate" (onClick)="searchJobs()"></p-button>
         </div>
     </div>
 
-    <div style="margin-bottom: 20px; padding-left: 20px;" class="flex justify-content-start">
+    <div style="margin-bottom: 20px; padding-left: 20px; max-width: 801px;" class="w-full flex justify-content-around">
         <h3 *ngIf="!isNavigateFromCompany && !isSearch">
             {{ (authUser?.id ? 'label.recommend' : 'label.jobs') | translate }} 
-         </h3>
+        </h3>
 
-         <h3 *ngIf="isSearch">
+        <h3 *ngIf="isSearch">
             {{ ( showJobs.length > 1 ? 'label.results_count_job' : 'label.result_count_job') | translate 
                 : {number: showJobs.length} }}
-         </h3>
+        </h3>
+
+        <i class="pi pi-filter cursor-pointer" *ngIf="!isNavigateFromCompany" 
+            (click)="isFilter = true" style="font-size: 24px;"></i>
     </div>
     <div class="jobs-items" *ngFor="let j of showJobs" [routerLink]="'/jobs/' + j.id">
         <div class="flex justify-content-between align-items-center">
@@ -96,3 +96,29 @@
     </p-carousel>
 </div>
 
+<p-sidebar [(visible)]="isFilter" (onHide)="isFilter = false" [position]="'right'" [blockScroll]="true">
+    <ng-template pTemplate="content">
+        <div class="w-full flex justify-content-start align-items-center" style="margin-bottom: 10px;">
+            <img src="../../../../../../assets/images/icons/location.svg" 
+                [width]="24" style="margin-right: 10px;">
+            <p-dropdown [options]="cities" [optionLabel]="'name'" class="w-full"
+                [optionValue]="'name'" [(ngModel)]="city" (onChange)="searchJobs($event)" [filter]="true"
+                [placeholder]="'message.choose_city' | translate"></p-dropdown>
+        </div>
+        
+        <div class="w-full flex justify-content-start align-items-center" style="margin-bottom: 30px;">
+            <img src="../../../../../../assets/images/icons/dollar-circle.svg" 
+                [width]="24" style="margin-right: 10px;">
+            <p-dropdown [options]="listSalary" [optionLabel]="'label'" class="w-full"
+                [optionValue]="'id'" [(ngModel)]="salary" [filter]="true"
+                [placeholder]="'message.choose_salary' | translate"></p-dropdown>
+        </div>
+
+        <div class="w-full flex justify-content-center">
+            <p-button class="btn-edit" [label]="'button.filter' | translate"
+                (onClick)="onFilter()"></p-button>
+            <p-button [label]="'button.cancel' | translate"
+                (onClick)="isFilter = false; salary = '';"></p-button>
+        </div>
+    </ng-template>
+</p-sidebar>

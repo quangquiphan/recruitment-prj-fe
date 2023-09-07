@@ -25,6 +25,7 @@ export class JobListComponent implements OnInit{
   totalPages: number = 0;
   companyName: string = '';
   cities: any[] = [];
+  listSalary: any[] = [];
   paging: any = {
     pageNumber: 1,
     pageSize: 10,
@@ -35,6 +36,10 @@ export class JobListComponent implements OnInit{
   first: number = 0;
   isSearch: boolean = false;
   keyword: string = '';
+  salary: string = '';
+  city: string = '';
+  isFilter: boolean = false;
+
   constructor(
     private jobService: JobService,
     private companyService: CompanyService,
@@ -42,6 +47,7 @@ export class JobListComponent implements OnInit{
     private authenticateService: AuthenticateService,
   ) {
     this.cities = AppData.getListCity();
+    this.listSalary = AppData.getSalary(translateService);
   }
 
   ngOnInit(): void {
@@ -135,28 +141,48 @@ export class JobListComponent implements OnInit{
     let params = {
       searchKey: this.keyword
     }
-
+    
     if (ev) {
       params.searchKey = ev.value;
     }
 
-    return this.jobService.searchJob({searchKey: this.keyword}).subscribe(
+    return this.jobService.searchJob({searchKey: params.searchKey}).subscribe(
       res => {
         if (res.status == 200) {
           this.showJobs = [];
           this.jobs = res.data;
           this.totalElements = res.data.length;
           this.first = 0;
-          
-          for (let index = 0; index < this.jobs.length; index++) {
-            if (index >= (this.paging.pageNumber - 1) * this.paging.pageSize 
-                && index < this.paging.pageSize * this.paging.pageNumber) {
-              this.showJobs.push(this.jobs[index]);
+          if (this.salary) {
+            this.jobs.filter((e: any) => {
+              if (e.salary === this.salary) {
+                this.showJobs.push(e);
+              }
+            });
+          } else {
+            for (let index = 0; index < this.jobs.length; index++) {
+              if (index >= (this.paging.pageNumber - 1) * this.paging.pageSize 
+                  && index < this.paging.pageSize * this.paging.pageNumber) {
+                this.showJobs.push(this.jobs[index]);
+              }
             }
           }
         }
       }
     )
+  }
+
+  onFilter() {
+    this.showJobs = [];
+    this.jobs.filter((e: any) => {
+      if (e.salary === this.salary) {
+        this.showJobs.push(e);
+      }
+    });
+
+    this.isFilter = false;
+
+    return this.showJobs;
   }
 
   getJobsByCompanyid() {

@@ -54,6 +54,10 @@
     }
 }
 
+.btn-edit {
+    margin-right: 20px;
+}
+
 @media screen and (min-width: 600px) {
     .items {
         min-width: 240px;
@@ -64,32 +68,6 @@
     :host::ng-deep {
         .p-carousel .p-carousel-content .p-carousel-prev, .p-carousel .p-carousel-content .p-carousel-next {
             display: none !important;
-        }
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .search-control {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        #search, .p-dropdown {
-            margin-right: 0px !important;
-            width: 100%;
-            max-width: unset !important;
-            margin-bottom: 20px;
-        }
-
-        p-dropdown {
-            margin-right: 0 !important;
-            width: 100%;
-        }
-    }
-
-    :host::ng-deep {
-        .p-dropdown {
-            margin-bottom: 20px !important;
         }
     }
 }
