@@ -21,7 +21,7 @@
                         {{ getFullName(user?.firstName, user?.lastName) }}
                     </h2>
 
-                    <img src="../../../assets/images/icons/edit-2.svg" [width]="24" (click)="isEditInformation = true">
+                    <img src="../../../assets/images/icons/edit-2.svg" [width]="24" (click)="onOpen()">
                 </div>
                 <h4 style="margin-bottom: 3px;">{{ user?.position }}</h4>
                 <span *ngIf="user?.yearExperience">
@@ -101,7 +101,7 @@
                                 <h3 style="margin-right: 10px;">{{ item.schoolName }}</h3>
                                 <span class="text-right">{{ parseFromAndToDate(item.fromDate, item.toDate, item.current) }}</span>
                             </div>
-                            <p>{{ 'Major : ' + item.major }}</p>
+                            <p>{{ parseLabel('label.major') + ": " + item.major }}</p>
                             <p [innerHTML]="item.description"></p>
                         </div>
                     </div>

@@ -90,6 +90,10 @@ export class AuthUserComponent implements OnInit{
     this.getSkills();
     this.getLanguages();
     this.getUserInfo(this.userId);
+  }
+
+  onOpen() {
+    this.isEditInformation = true;
     this.genders = AppData.getGender(this.translateService);
     this.majors = AppData.getMajor(this.translateService);
     this.yearExperiences = AppData.getYearExperience(this.translateService);
@@ -428,6 +432,10 @@ export class AuthUserComponent implements OnInit{
 
   getFullName(firstName: any, lastName: any) {
     return firstName + " " + lastName;
+  }
+
+  parseLabel(label: string) {
+    return this.translateService.instant(label);
   }
 
   parseFromAndToDate(fromDate: string, toDate: string, isCurrent: boolean) {

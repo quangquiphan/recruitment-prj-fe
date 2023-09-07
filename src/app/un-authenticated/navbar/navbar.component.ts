@@ -9,6 +9,7 @@ import AppUtil from 'src/app/utilities/app-util';
 import { JobDetailComponent } from '../homepage/content/jobs/job-detail/job-detail.component';
 import { UserService } from 'src/app/services/user.service';
 import { HttpEventType } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit{
 
   constructor(
     private fb: FormBuilder,
+    private _router: Router,
     private userService: UserService,
     private messageService: MessageService,
     private translateService: TranslateService,
@@ -195,6 +197,7 @@ export class NavbarComponent implements OnInit{
   }
 
   logout() {
+    this._router.navigate(['/jobs']).then(r => {});
     return this.authenticatService.logout().subscribe(
       res => {
         if (res.status === 200) {
