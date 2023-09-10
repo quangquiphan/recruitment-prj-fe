@@ -32,7 +32,7 @@ export class VerifyEmailComponent implements OnInit{
           this.message = 'message.verify_email_successfully';
           AppUtil.getMessageSuccessfully(this.messageService, this.translateService,
             'message.verify_email_successfully');
-          this.route.navigate(['/sign-in']);
+          this.route.navigate(['/']);
         } else {
           this.message = 'message.verify_email_failed';
           AppUtil.getMessageFailed(this.messageService, this.translateService,

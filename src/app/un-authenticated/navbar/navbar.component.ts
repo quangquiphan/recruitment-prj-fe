@@ -87,6 +87,14 @@ export class NavbarComponent implements OnInit{
         }
       },
       {
+        label: this.parseLable('button.sign_up'),
+        icon: 'pi pi-sign-in',
+        visible: !this.checkVisible(this.authUser),
+        command: () => {
+          this._router.navigate(['/sign-up']).then(r => {});
+        }
+      },
+      {
         label: this.parseLable('label.profile'),
         icon: 'pi pi-user',
         routerLink: '/profile',

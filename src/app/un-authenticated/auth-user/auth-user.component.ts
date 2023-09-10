@@ -94,6 +94,7 @@ export class AuthUserComponent implements OnInit{
 
   onOpen() {
     this.isEditInformation = true;
+    this.patchValueForm(this.user);
     this.genders = AppData.getGender(this.translateService);
     this.majors = AppData.getMajor(this.translateService);
     this.yearExperiences = AppData.getYearExperience(this.translateService);
@@ -125,10 +126,16 @@ export class AuthUserComponent implements OnInit{
             'message.update_profile_successfully');
           this.getUserInfo(this.userId);
           this.isEditInformation = false;
+          this.infoForm.reset();
+          this.skills.clear();
+          this.languages.clear();
         } else {
           AppUtil.getMessageFailed(this.messageService, this.translateService,
             'message.update_profile_failed');
           this.isEditInformation = false;
+          this.infoForm.reset();
+          this.skills.clear();
+          this.languages.clear();
         }
       }
     )
@@ -167,6 +174,8 @@ export class AuthUserComponent implements OnInit{
   onCancelUpdateInfo() {
     this.isEditInformation = false;
     this.infoForm.reset();
+    this.skills.clear();
+    this.languages.clear();
   }
 
   onSubmitEdu() {
@@ -300,6 +309,9 @@ export class AuthUserComponent implements OnInit{
       this.addLang(l[index]);
     }
 
+    console.log(data);
+    
+
     return this.infoForm.patchValue({
       email: data.email || '',
       position: data.position || '',
@@ -311,8 +323,8 @@ export class AuthUserComponent implements OnInit{
       summary: data.summary || '',
       link: data.link || '',
       address: data.address || '',
-      year_experience: data.yearExperience || this.yearExperiences[0].id,
-      date_of_birth: moment(moment(data.expiryDate, AppConstant.DATE_FORMAT.GET).toDate()).format(AppConstant.DATE_FORMAT.GET) 
+      year_experience: data.yearExperience || this.yearExperiences[0]?.id,
+      date_of_birth: moment(data.dateOfBirth).format(AppConstant.DATE_FORMAT.GET) 
     })
   }
 
@@ -424,7 +436,6 @@ export class AuthUserComponent implements OnInit{
       res => {
         if (res.status === 200) {
           this.user = res.data;
-          this.patchValueForm(this.user);
         }
       }
     )
