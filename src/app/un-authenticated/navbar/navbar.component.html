@@ -124,6 +124,14 @@
                                 <input type="file" id="cv-mobile" [hidden]="true" (change)="selectedCV($event)">
                             </li>
         
+                            <li class="w-full flex justify-content-start align-items-center cursor-pointer"
+                                *ngIf="authUser?.cv">
+                                <div (click)="openCV()" class="w-full flex justify-content-start align-items-center">
+                                    <i class="pi pi-file" style="margin-right: 10px;"></i>
+                                    <span class="font-size-14">{{ 'label.view_cv' | translate }}</span>
+                                </div>
+                            </li>
+        
                             <li class="w-full flex justify-content-start align-items-center cursor-pointer" 
                                 (click)="logout()">
                                 <i class="pi pi-sign-out" style="margin-right: 10px;"></i>

@@ -76,7 +76,8 @@
         "top_company": "Công ty",
         "result_count_job": "Kết quả ({{number}})",
         "results_count_job": "Kết quả ({{number}})",
-        "applied": "Ứng tuyển lại"
+        "applied": "Ứng tuyển lại",
+        "view_cv": "Xem cv"
     },
     "message": {
         "sign_up_successfully": "Đăng ký thành công!",

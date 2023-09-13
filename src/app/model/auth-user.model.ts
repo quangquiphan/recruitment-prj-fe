@@ -16,4 +16,5 @@ export interface AuthUser {
     status: string,
     role: string,
     company: any,
+    cv: string,
 }

@@ -76,10 +76,10 @@ export class UserService {
     return this.http.request(req);
   }
   
-  uploadCV(id: string, file: File):Observable<HttpEvent<any>> {
+  uploadCV(id: string, CV: File):Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
 
-    formData.append('file', file);
+    formData.append('CV', CV);
 
     const req = new HttpRequest('PUT', `${_prefix}/upload-cv/${id}`, formData, {
       reportProgress: true,

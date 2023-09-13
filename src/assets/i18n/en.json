@@ -76,7 +76,8 @@
         "top_company": "Top company",
         "result_count_job": "Result ({{number}})",
         "results_count_job": "Results ({{number}})",
-        "applied": "Applied"
+        "applied": "Applied",
+        "view_cv": "View cv"
     },
     "message": {
         "sign_up_successfully": "Sign up successfully!",

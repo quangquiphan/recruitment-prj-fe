@@ -10,6 +10,7 @@ import { JobDetailComponent } from '../homepage/content/jobs/job-detail/job-deta
 import { UserService } from 'src/app/services/user.service';
 import { HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CandidateService } from 'src/app/services/candidate.service';
 
 @Component({
   selector: 'app-navbar',
@@ -38,6 +39,7 @@ export class NavbarComponent implements OnInit{
     private userService: UserService,
     private messageService: MessageService,
     private translateService: TranslateService,
+    private candidateService: CandidateService,
     private authenticatService: AuthenticateService,
   ) {
     this.changePasswordForm = this.fb.group({
@@ -60,7 +62,6 @@ export class NavbarComponent implements OnInit{
     this.authUser = this.authenticatService.authUser;
     this.init();
     this.onResize();
-    
   }
 
   init() {
@@ -118,6 +119,14 @@ export class NavbarComponent implements OnInit{
         }
       },
       {
+        label: this.parseLable('label.view_cv'),
+        icon: 'pi pi-file',
+        visible: this.checkCVVisible(this.authUser),
+        command: () => {
+          this.openCV();
+        }
+      },
+      {
         label: this.parseLable('button.sign_out'),
         icon: 'pi pi-sign-out',
         visible: this.checkVisible(this.authUser),
@@ -141,10 +150,18 @@ export class NavbarComponent implements OnInit{
       next: (event : any) => {
         if (event.type === HttpEventType.UploadProgress) {
           this.isUploadCV = false;
-          window.location.reload();
         }
       }
     })
+  }
+
+  openCV() {
+    this.candidateService.downloadPDF(this.authUser?.id || "").subscribe(
+      (res : any) => {
+        const fileUrl = URL.createObjectURL(res);
+        window.open(fileUrl, "mozillaWindow", "popup");
+      }
+    )
   }
 
   onShowLang() {
@@ -198,6 +215,14 @@ export class NavbarComponent implements OnInit{
 
   checkVisible(authUser: AuthUser | undefined) {
     if (authUser?.id) {
+      return true;
+    }
+
+    return false;
+  }
+
+  checkCVVisible(authUser: AuthUser | undefined) {
+    if (authUser?.id && authUser.cv) {
       return true;
     }
 
