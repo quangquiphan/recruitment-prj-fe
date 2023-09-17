@@ -112,7 +112,7 @@ export class JobDetailComponent implements OnInit{
 
   parseDate(expiry: string) {
     let now = new Date();
-    let expiryDate = new Date(moment(expiry, "DD-MM-YYYY").add(1, 'day').toDate()); 
+    let expiryDate = new Date(moment(expiry).add(1, 'day').toDate()); 
     let result = (expiryDate.getTime() - now.getTime())/(1000 * 60);
     
     if (Math.round(result/(60*24)) > 1) {
@@ -120,7 +120,7 @@ export class JobDetailComponent implements OnInit{
       return this.translateService.instant(`label.${result > 1 ? 'num_days' : 'num_day'}`, {number: result});
     }
 
-    if (Math.round(result/(60)) > 0) {
+    if (Math.round(result/(60)) > 1) {
       result = Math.round(result / (60));
       return this.translateService.instant(`label.${result > 1 ? 'num_hours' : 'num_hour'}`, {number: result});
     }

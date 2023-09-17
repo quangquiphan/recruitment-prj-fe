@@ -1,6 +1,6 @@
 <div class="flex justify-content-center align-items-center">
     <div class="company">
-        <div class="company-item" *ngFor="let c of companies" 
+        <div class="company-item cursor-pointer" *ngFor="let c of companies" 
             [routerLink]="'/company/' + c.id + '/overview'">
             <div class="c-avt" *ngIf="!c?.avatar">
                 <img src="../../../../../assets/images/TopWork-logo.png" width="100%">

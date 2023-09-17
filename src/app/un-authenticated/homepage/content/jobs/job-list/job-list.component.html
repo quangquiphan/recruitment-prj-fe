@@ -10,7 +10,7 @@
     </div>
 
     <div style="margin-bottom: 20px; padding-left: 20px; max-width: 801px;" 
-        class="w-full flex justify-content-around" *ngIf="showJobs.length > 0">
+        class="w-full flex justify-content-around" *ngIf="!isNavigateFromCompany">
         <h3 *ngIf="!isNavigateFromCompany && !isSearch">
             {{ (authUser?.id ? 'label.recommend' : 'label.jobs') | translate }} 
         </h3>
