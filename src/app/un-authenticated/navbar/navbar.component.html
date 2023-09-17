@@ -105,7 +105,7 @@
                         class="w-full flex justify-content-between align-items-center">
                         <ul>
                             <li class="w-full flex justify-content-start align-items-center cursor-pointer"
-                                [routerLink]="'/profile'">
+                                [routerLink]="'/profile'" (click)="isShowMenu = false">
                                 <i class="pi pi-user" style="margin-right: 10px;"></i>
                                 <span class="font-size-14">{{ 'label.profile' | translate }}</span>
                             </li>
@@ -121,7 +121,8 @@
                                     <i class="pi pi-upload" style="margin-right: 10px;"></i>
                                     <span class="font-size-14">{{ 'label.upload_cv' | translate }}</span>
                                 </label>
-                                <input type="file" id="cv-mobile" [hidden]="true" (change)="selectedCV($event)">
+                                <input type="file" id="cv-mobile" [hidden]="true" accept=".pdf" 
+                                    (change)="selectedCV($event)">
                             </li>
         
                             <li class="w-full flex justify-content-start align-items-center cursor-pointer"
@@ -167,14 +168,14 @@
 </p-sidebar>
 
 <p-dialog class="custom-dialog" [(visible)]="isLogin" (onHide)="isLogin = false" [draggable]="false"
-    [header]="'button.sign_in' | translate" *ngIf="!isMobile">
+    [header]="'button.sign_in' | translate" *ngIf="!isMobile" [blockScroll]="true">
     <div style="padding-top: 30px;">
         <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (onClose)="onClose($event)"></app-sign-in>
     </div>
 </p-dialog>
 
 <p-dialog class="custom-dialog" [(visible)]="isChangePassword" (onHide)="onCancel()" [draggable]="false"
-    [header]="'label.change_password' | translate">
+    [header]="'label.change_password' | translate" [blockScroll]="true">
     <form [formGroup]="changePasswordForm" style="padding-top: 30px;" class="change-password">
         <div class="flex flex-column w-full margin-bottom-10">
             <label for="pwd" class="font-size-14 font-bold" style="margin-bottom: 2px;">
@@ -213,10 +214,10 @@
 
 
 <p-dialog *ngIf="!isMobileAndTablet" class="custom-dialog" [(visible)]="isUploadCV" (onHide)="isUploadCV = false" [draggable]="false"
-    [header]="'label.upload_cv' | translate">
+    [header]="'label.upload_cv' | translate" [blockScroll]="true">
     <div class="flex justify-content-center align-items-center" style="padding-top: 30px; min-width: 300px;">
         <label for="cv" class="cursor-pointer">{{ 'label.upload_cv' | translate }}</label>
-        <input type="file" id="cv" [hidden]="true" (change)="selectedCV($event)">
+        <input type="file" id="cv" [hidden]="true" accept=".pdf" (change)="selectedCV($event)">
     </div>
 </p-dialog>
 

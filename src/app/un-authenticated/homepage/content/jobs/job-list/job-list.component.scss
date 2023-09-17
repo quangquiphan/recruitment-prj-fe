@@ -66,8 +66,8 @@
 
 @media screen and (max-width: 500px) {
     :host::ng-deep {
-        .p-carousel .p-carousel-content .p-carousel-prev, .p-carousel .p-carousel-content .p-carousel-next {
-            display: none !important;
+        .p-carousel .p-carousel-indicators .p-carousel-indicator button {
+            display: none;
         }
     }
 }
@@ -97,5 +97,10 @@
 
     .s .p-button {
         width: 121px !important;
+    }
+
+    .p-carousel .p-carousel-indicators .p-carousel-indicator button {
+        width: 0.5rem !important;
+        border-radius: 50% !important;
     }
 }

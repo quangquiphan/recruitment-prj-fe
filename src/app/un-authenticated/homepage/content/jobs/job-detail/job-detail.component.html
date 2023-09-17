@@ -62,7 +62,7 @@
 </div>
 
 <p-dialog class="custom-dialog" [(visible)]="isLogin" (onHide)="isLogin = false" [draggable]="false"
-    [header]="'button.sign_in' | translate" *ngIf="!isMobile">
+    [header]="'button.sign_in' | translate" *ngIf="!isMobile" [blockScroll]="true">
     <div style="padding-top: 30px;">
         <app-sign-in *ngIf="isLogin" [isMobile]="isMobile" (onClose)="onClose($event)"></app-sign-in>
     </div>

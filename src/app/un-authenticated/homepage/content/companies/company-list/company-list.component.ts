@@ -10,11 +10,13 @@ import { CompanyService } from 'src/app/services/company.service';
 })
 export class CompanyListComponent implements OnInit{
   companies: Company[] = [];
+  listCompanies: Company[] = [];
   totalElements: number = 0;
   totalPages: number = 0;
+  first: number = 0;
   paging: any = {
     pageNumber: 1,
-    pageSize: 10
+    pageSize: 9
   }
 
   constructor(
@@ -26,13 +28,33 @@ export class CompanyListComponent implements OnInit{
     this.getAllCompany();
   }
 
+  onPageChange(ev: any) {
+    if (ev) {
+      this.paging.pageNumber = ev.first/ev.rows + 1;
+    }
+
+    this.getListCompany(this.listCompanies, this.paging);
+  }
+
+  getListCompany(list: any, paging: any) {
+    this.companies = [];
+    for (let i = 0; i < list.length; i++) {
+      if (i >= (paging.pageNumber - 1) * paging.pageSize &&
+        i < paging.pageNumber * paging.pageSize) {
+        this.companies.push(this.listCompanies[i]);
+      }
+    }
+
+    return this.companies;
+  }
+
   getAllCompany() {
     this.companyServices.getAllCompany(this.paging).subscribe(
       res => {
         if (res.status === 200) {
-          this.companies = res.data.content;
-          this.totalElements = res.data.totalElements;
-          this.totalPages = res.data.totalPages;
+          this.listCompanies = res.data;
+          this.totalElements = res.data.length;
+          this.getListCompany(this.listCompanies, this.paging);
         }
       }
     )

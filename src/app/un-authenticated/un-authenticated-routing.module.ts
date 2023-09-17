@@ -15,6 +15,7 @@ import { CompanyListComponent } from "./homepage/content/companies/company-list/
 import { JobDetailComponent } from "./homepage/content/jobs/job-detail/job-detail.component";
 import { JobListComponent } from "./homepage/content/jobs/job-list/job-list.component";
 import { AuthUserComponent } from "./auth-user/auth-user.component";
+import { SignInComponent } from "./sign-in/sign-in.component";
 
 const routes: Routes = [
     {
@@ -82,7 +83,7 @@ const routes: Routes = [
             },
             {
                 path: 'sign-in',
-                component: SignUpComponent
+                component: SignInComponent  
             },
             {
                 path: 'forgot-password',

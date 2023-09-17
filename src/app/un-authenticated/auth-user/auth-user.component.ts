@@ -69,7 +69,7 @@ export class AuthUserComponent implements OnInit{
       link: [''],
       address: ['', Validators.required],
       year_experience: [''],
-      date_of_birth: [moment().toDate()],
+      date_of_birth: [moment().toDate(), Validators.required],
       skills: this.fb.array([]),
       languages: this.fb.array([]),
     });
@@ -100,7 +100,7 @@ export class AuthUserComponent implements OnInit{
     this.yearExperiences = AppData.getYearExperience(this.translateService);
   }
 
-  onSubmitUpdateProfile() {
+  onSubmitUpdateProfile() {    
     let params = {
       email: this.infoForm.value.email,
       position: this.infoForm.value.position,
@@ -113,8 +113,8 @@ export class AuthUserComponent implements OnInit{
       link: this.infoForm.value.link,
       address: this.infoForm.value.address,
       year_experience: this.infoForm.value.year_experience,
-      date_of_birth: this.infoForm.value.date_of_birth ? 
-        moment(this.infoForm.value.date_of_birth).format(AppConstant.DATE_FORMAT.POST) : '',
+      date_of_birth: moment(moment(this.infoForm.value.date_of_birth, AppConstant.DATE_FORMAT.GET).toDate())
+        .format(AppConstant.DATE_FORMAT.POST),
       skills: this.infoForm.value.skills,
       languages: this.infoForm.value.languages,
     }

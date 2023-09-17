@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { MessageService } from 'primeng/api';
 import { AuthUser } from 'src/app/model/auth-user.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import AppConstant from 'src/app/utilities/app-constant';
@@ -16,10 +18,14 @@ export class SignInComponent implements OnInit{
   @Output() onClose: EventEmitter<any> = new EventEmitter();
   signInForm: FormGroup = new FormGroup({});
   disable: boolean = false;
+  isLogin: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private _router: Router,
+    private _route: ActivatedRoute,
+    private messageService: MessageService,
+    private translateService: TranslateService,
     private authenticateService: AuthenticateService
   ) {
     this.signInForm = this.fb.group({
@@ -36,6 +42,7 @@ export class SignInComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.isLogin = this._route.routeConfig?.path?.includes('sign-in') ? true : false;
   }
 
   onSignIn() {
@@ -57,6 +64,13 @@ export class SignInComponent implements OnInit{
                 const authUser: AuthUser = res.data;
                 this.authenticateService.setAuthUser(authUser);
                 this.onClose.emit(authUser);
+                if (this.isLogin) {
+                  this._router.navigate(['/jobs']).then(r => {});
+                }
+              } else {
+                AppUtil.getMessageFailed(this.messageService, this.translateService,
+                  'message.sign_in_failed');
+                this.signInForm.reset();
               }
             }
           );

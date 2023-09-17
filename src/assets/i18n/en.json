@@ -19,7 +19,7 @@
         "upload_cv": "Upload CV",
         "english": "English",
         "vietnamese": "Vietnamese",
-        "powered_by_quang_qui": "© {{year}} <b>Powered</b> by Quang Qúi",
+        "powered_by_quang_qui": "© {{year}} <b>Powered</b> by Phan Quang Qui",
         "old_password": "Old password",
         "new_password": "New password",
         "confirm_new_password": "Confirm new password",
@@ -113,7 +113,8 @@
         "choose_city": "City",
         "choose_salary": "Salary",
         "apply_successfully": "Apply successfully!",
-        "apply_failed": "Apply failed!"
+        "apply_failed": "Apply failed!",
+        "sign_in_failed": "Sign in failed!"
     },
     "button": {
         "sign_in": "Sign in",
@@ -161,6 +162,7 @@
         "COMPANY_ADMIN_MEMBER": "Admin"
     },
     "salary": {
+        "ALL": "All",
         "UNDER_3": "Under 3 million VND",
         "FROM_3_TO_5": "3 - 5 million VND",
         "FROM_5_TO_10": "5 - 10 million VND",

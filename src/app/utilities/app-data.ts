@@ -324,8 +324,8 @@ const AppData = {
     getSalary(translate: TranslateService) {
         return [           
             {
-                id: "EXPECTED",
-                label: translate.instant('salary.EXPECTED')
+                id: "ALL",
+                label: translate.instant('salary.ALL')
             },
             {
                 id: "UNDER_3",
@@ -354,6 +354,10 @@ const AppData = {
             {
                 id: "OVER_50",
                 label: translate.instant('salary.OVER_50')
+            },
+            {
+                id: "EXPECTED",
+                label: translate.instant('salary.EXPECTED')
             },
         ]
     },

@@ -12,3 +12,7 @@
         </div>
     </div>
 </div>
+
+<p-paginator (onPageChange)="onPageChange($event)" [rows]="paging.pageSize" 
+    [totalRecords]="totalElements" [first]="first" *ngIf="totalElements > paging.pageSize">
+</p-paginator>

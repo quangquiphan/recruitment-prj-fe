@@ -19,7 +19,7 @@
         "upload_cv": "Upload CV",
         "english": "Tiếng Anh",
         "vietnamese": "Tiếng Việt",
-        "powered_by_quang_qui": "© {{year}} <b>Bản quyền</b> thuộc Quang Quí",
+        "powered_by_quang_qui": "© {{year}} <b>Bản quyền</b> thuộc Phan Quang Quí",
         "old_password": "Mật khẩu củ",
         "new_password": "Mật khẩu mới",
         "confirm_new_password": "Nhập lại mật khẩu",
@@ -113,7 +113,8 @@
         "choose_city": "Thành phố",
         "choose_salary": "Lương mong muốn",
         "apply_successfully": "Ứng tuyển thành công!",
-        "apply_failed": "Ứng tuyển thất bại!"
+        "apply_failed": "Ứng tuyển thất bại!",
+        "sign_in_failed": "Đăng nhập thất bại!"
     },
     "button": {
         "sign_in": "Đăng nhập",
@@ -161,6 +162,7 @@
         "COMPANY_ADMIN_MEMBER": "Quản trị viên"
     },
     "salary": {
+        "ALL": "Tất cả",
         "UNDER_3": "Under 3 triệu VND",
         "FROM_3_TO_5": "3 - 5 triệu VND",
         "FROM_5_TO_10": "5 - 10 triệu VND",

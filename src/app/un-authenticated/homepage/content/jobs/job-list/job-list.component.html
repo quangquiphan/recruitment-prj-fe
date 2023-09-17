@@ -5,7 +5,7 @@
             <img src="../../../../../../assets/images/icons/search.svg" class="search-icon" [width]="24">
             <input type="text" pInputText style="margin-right: 20px;" id="search" [(ngModel)]="keyword"
                 [placeholder]="'message.search_by_job_name_job_position_city' | translate">
-            <p-button [label]="'button.search' | translate" class="s" (onClick)="searchJobs()"></p-button>
+            <p-button [label]="'button.search' | translate" class="s" (onClick)="searchJobsBykeyword()"></p-button>
         </div>
     </div>
 
@@ -21,9 +21,9 @@
         </h3>
 
         <i class="pi pi-filter cursor-pointer" *ngIf="!isNavigateFromCompany" 
-            (click)="isFilter = true" style="font-size: 24px;"></i>
+            (click)="isFilter = true; getFilterOptions()" style="font-size: 24px;"></i>
     </div>
-    <div class="jobs-items" *ngFor="let j of showJobs" [routerLink]="'/jobs/' + j.id">
+    <div class="jobs-items cursor-pointer" *ngFor="let j of showJobs" [routerLink]="'/jobs/' + j.id">
         <div class="flex justify-content-between align-items-center">
             <div class="flex justify-content-start align-items-center" style="margin-bottom: 10px;">
                 <div class="c-avt" *ngIf="!j.companyAvatar">
@@ -68,7 +68,8 @@
             <p-chip *ngFor="let l of j.languages">{{ l.name }}</p-chip>
         </div>
     </div>
-    <div *ngIf="showJobs.length < totalElements" (click)="viewMore()" 
+
+    <div *ngIf="showJobs.length < totalElements && !filter" (click)="viewMore()" 
         class="font-size-13" style="margin-bottom: 30px;">
         {{ 'label.view_more' | translate }}
     </div>
@@ -106,7 +107,7 @@
             <img src="../../../../../../assets/images/icons/location.svg" 
                 [width]="24" style="margin-right: 10px;">
             <p-dropdown [options]="cities" [optionLabel]="'name'" class="w-full"
-                [optionValue]="'name'" [(ngModel)]="city" (onChange)="searchJobs($event)" [filter]="true"
+                [optionValue]="'name'" [(ngModel)]="city" (onChange)="searchJobsByCity($event)" [filter]="true"
                 [placeholder]="'message.choose_city' | translate"></p-dropdown>
         </div>
         

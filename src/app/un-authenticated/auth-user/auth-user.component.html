@@ -12,7 +12,8 @@
                 <label for="avatar" class="avatar flex justify-content-center align-items-center cursor-pointer">
                     <img src="../../../assets/images/icons/take-picture.svg">
                 </label>
-                <input type="file" id="avatar" [hidden]="true" (change)="selectedAvatar($event)">
+                <input type="file" id="avatar" [hidden]="true" accept=".png, .jpg, .gif, .psd" 
+                    (change)="selectedAvatar($event)">
             </div>
     
             <div class="flex flex-column">
@@ -201,7 +202,7 @@
 </div>
 
 <p-dialog class="custom-dialog" [(visible)]="isEditInformation" (onHide)="onCancelUpdateInfo()"
-    [header]="'label.edit_information' | translate" [draggable]="false">
+    [header]="'label.edit_information' | translate" [draggable]="false" [blockScroll]="true">
     <div class="w-full flex justify-content-center align-items-center">
         <form style="padding-top: 30px;" [formGroup]="infoForm">
             <div class="flex flex-column w-full" style="margin-bottom: 10px;">
@@ -356,7 +357,7 @@
     
             <div class="w-full flex justify-content-center align-items-center">
                 <p-button class="btn btn-edit" [label]="'button.edit' | translate"
-                    (onClick)="onSubmitUpdateProfile()"></p-button>
+                    (onClick)="onSubmitUpdateProfile()" [disabled]="infoForm.invalid"></p-button>
                 <p-button [label]="'button.cancel' | translate"></p-button>
             </div>
         </form>
@@ -364,7 +365,7 @@
 </p-dialog>
 
 <p-dialog class="custom-dialog" [(visible)]="isAddEducation" (onHide)="onCancelAddEdu()"
-[draggable]="false" [header]="'label.add_education' | translate">
+    [draggable]="false" [header]="'label.add_education' | translate" [blockScroll]="true">
     <div class="w-full flex justify-content-center align-items-center">
         <form style="padding-top: 30px;" [formGroup]="eduForm">
             <div class="flex flex-column w-full" style="margin-bottom: 10px;">
@@ -439,7 +440,7 @@
 </p-dialog>
 
 <p-dialog class="custom-dialog" [(visible)]="isShowWorkHistory" (onHide)="isShowWorkHistory = false; workId = ''"
-    [header]="(workId ? 'label.edit_work_history' : 'label.add_work_history') | translate">
+    [header]="(workId ? 'label.edit_work_history' : 'label.add_work_history') | translate" [blockScroll]="true">
     <div class="w-full" style="padding-top: 30px;">
         <app-work-history *ngIf="isShowWorkHistory" [userId]="userId" [id]="workId"
             (onReloadData)="onReloadData($event)"></app-work-history>
@@ -447,7 +448,7 @@
 </p-dialog>
 
 <p-dialog class="custom-dialog" [(visible)]="isShowProject" (onHide)="isShowProject = false; proId = ''"
-    [header]="(workId ? 'label.edit_project' : 'label.add_project') | translate">
+    [header]="(workId ? 'label.edit_project' : 'label.add_project') | translate" [blockScroll]="true">
     <div class="w-full" style="padding-top: 30px;">
         <app-project *ngIf="isShowProject" [workId]="workId" [id]="proId"
             (onReloadData)="onReloadData($event)"></app-project>
@@ -455,7 +456,7 @@
 </p-dialog>
 
 <p-dialog class="custom-dialog" [(visible)]="isShowConfirmDelete" (onHide)="onCancel()"
-    [header]="'label.confirm_delete' | translate">
+    [header]="'label.confirm_delete' | translate" [blockScroll]="true">
     <div class="w-full flex justify-content-center align-items-center" 
         style="padding-top: 30px; margin-bottom: 30px;">
         <span>{{ 'message.do_u_wanna_delete' | translate }}</span>

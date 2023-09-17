@@ -38,6 +38,7 @@ export class JobListComponent implements OnInit{
   keyword: string = '';
   salary: string = '';
   city: string = '';
+  filter: boolean = false;
   isFilter: boolean = false;
 
   constructor(
@@ -46,13 +47,11 @@ export class JobListComponent implements OnInit{
     private translateService: TranslateService,
     private authenticateService: AuthenticateService,
   ) {
-    this.cities = AppData.getListCity();
-    this.listSalary = AppData.getSalary(translateService);
   }
 
   ngOnInit(): void {
     this.authUser = this.authenticateService.authUser;
-    
+    this.totalElements = this.jobs.length;
     this.responsiveOptions = [
       {
         breakpoint: '1199px',
@@ -83,6 +82,11 @@ export class JobListComponent implements OnInit{
     }      
     
     this.getListCompany();
+  }
+
+  getFilterOptions() {
+    this.cities = AppData.getListCity();
+    this.listSalary = AppData.getSalary(this.translateService);
   }
 
   getJobsRecomment(paging: any) {
@@ -136,21 +140,28 @@ export class JobListComponent implements OnInit{
     )
   }
 
-  searchJobs(ev?: any) {
+  searchJobsBykeyword() {
+    if (!this.keyword) return this.showJobs;
     this.isSearch = true;
-    let params = {
-      searchKey: this.keyword
-    }
-    
-    if (ev) {
-      params.searchKey = ev.value;
-    }
+    this.city = '';
+    return this.searchJob(this.keyword);
+  }
 
-    return this.jobService.searchJob({searchKey: params.searchKey}).subscribe(
+  searchJobsByCity(ev: any) {
+    if (ev.value) {
+      this.keyword = '';
+      return this.searchJob(ev.value);
+    }
+    return this.showJobs;
+  }
+
+  searchJob(searchKey: any) {
+    return this.jobService.searchJob({searchKey: searchKey}).subscribe(
       res => {
         if (res.status == 200) {
           this.showJobs = [];
           this.jobs = res.data;
+          
           this.totalElements = res.data.length;
           this.first = 0;
           if (this.salary) {
@@ -173,16 +184,18 @@ export class JobListComponent implements OnInit{
   }
 
   onFilter() {
+    if (!this.salary) return [this.isFilter = false, this.showJobs];
+    if (this.salary === 'ALL') return [this.isFilter = false, this.showJobs = this.jobs];
+    
     this.showJobs = [];
+    this.filter = true;
     this.jobs.filter((e: any) => {
       if (e.salary === this.salary) {
         this.showJobs.push(e);
       }
     });
 
-    this.isFilter = false;
-
-    return this.showJobs;
+    return [this.isFilter = false, this.showJobs];
   }
 
   getJobsByCompanyid() {
@@ -209,7 +222,7 @@ export class JobListComponent implements OnInit{
     return this.companyService.getAllCompany({pageNumber: 1, pageSize: 1000}).subscribe(
       res => {
         if (res.status === 200) {
-          this.companies = res.data.content;
+          this.companies = res.data;
         }
       }
     )
