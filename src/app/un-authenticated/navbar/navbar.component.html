@@ -109,6 +109,12 @@
                                 <i class="pi pi-user" style="margin-right: 10px;"></i>
                                 <span class="font-size-14">{{ 'label.profile' | translate }}</span>
                             </li>
+
+                            <li class="w-full flex justify-content-start align-items-center cursor-pointer"
+                                [routerLink]="'/history'" (click)="isShowMenu = false">
+                                <i class="pi pi-history" style="margin-right: 10px;"></i>
+                                <span class="font-size-14">{{ 'label.jobs_applied' | translate }}</span>
+                            </li>
         
                             <li class="w-full flex justify-content-start align-items-center cursor-pointer" 
                                 (click)="isChangePassword = true">

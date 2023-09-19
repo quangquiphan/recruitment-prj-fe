@@ -77,6 +77,7 @@
         "result_count_job": "Kết quả ({{number}})",
         "results_count_job": "Kết quả ({{number}})",
         "applied": "Ứng tuyển lại",
+        "jobs_applied": "Công việc đã ứng tuyển",
         "view_cv": "Xem cv"
     },
     "message": {
@@ -114,7 +115,10 @@
         "choose_salary": "Lương mong muốn",
         "apply_successfully": "Ứng tuyển thành công!",
         "apply_failed": "Ứng tuyển thất bại!",
-        "sign_in_failed": "Đăng nhập thất bại!"
+        "sign_in_failed": "Đăng nhập thất bại!",
+        "appliedFor_job_on_date": "<b>Ứng tuyển</b> công việc <b>{{jobname}}</b> vào ngày <b>{{date}}</b>",
+        "delete_successfully": "Xoá thành công!",
+        "delete_failed": "Xoá thất bại!"
     },
     "button": {
         "sign_in": "Đăng nhập",

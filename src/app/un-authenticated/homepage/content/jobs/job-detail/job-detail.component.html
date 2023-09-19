@@ -55,7 +55,7 @@
             <p-button class="btn-edit" [label]="'label.back' | translate"
                 (onClick)="onBack()"></p-button>
             <p-button [label]="(isApplied ? 'label.applied' : 'label.apply') | translate" 
-                [ngClass]="isApplied ? 'btn-edit' : ''" 
+                [ngClass]="isApplied ? 'btn-edit' : ''" [disabled]="disable"
                 (onClick)="onApply(job?.id || jobId)"></p-button>
         </div>
     </div>

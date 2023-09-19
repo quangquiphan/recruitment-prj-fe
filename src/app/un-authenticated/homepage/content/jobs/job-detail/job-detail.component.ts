@@ -25,6 +25,7 @@ export class JobDetailComponent implements OnInit{
   isLogin: boolean = false;
   isMobile: boolean = false;
   isApplied: boolean = false;
+  disable: boolean = false;
 
   constructor(
     private _router: Router,
@@ -60,6 +61,8 @@ export class JobDetailComponent implements OnInit{
       res => {
         if (res.status === 200) {
           this.user = res.data;
+          console.log(this.user);
+          
           this.checkApplied(this.jobId);
         }
       }
@@ -105,6 +108,9 @@ export class JobDetailComponent implements OnInit{
     this.user?.jobsApplied.forEach((e: any) => {
       if (e.jobId === jobId) {
         this.isApplied  = true;
+        this.disable = moment(moment(e.createdDate).add(3, 'days')).isAfter(moment());
+        console.log
+        (moment(moment(e.createdDate).add(3, 'days')).isAfter(moment()))
       }
     })
     return this.isApplied;

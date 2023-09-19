@@ -25,6 +25,7 @@ import { JobListComponent } from './homepage/content/jobs/job-list/job-list.comp
 import { AuthUserComponent } from "./auth-user/auth-user.component";
 import { WorkHistoryComponent } from './auth-user/work-history/work-history.component';
 import { ProjectComponent } from './auth-user/project/project.component';
+import { HistoryAppliedComponent } from './history-applied/history-applied.component';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { ProjectComponent } from './auth-user/project/project.component';
         AuthUserComponent,
         WorkHistoryComponent,
         ProjectComponent,
+        HistoryAppliedComponent,
     ],
 
     imports: [

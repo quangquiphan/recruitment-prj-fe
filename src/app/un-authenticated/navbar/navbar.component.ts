@@ -103,6 +103,13 @@ export class NavbarComponent implements OnInit{
         command: () => {}
       },
       {
+        label: this.parseLable('label.jobs_applied'),
+        icon: 'pi pi-history',
+        routerLink: '/history',
+        visible: this.checkVisible(this.authUser),
+        command: () => {}
+      },
+      {
         label: this.parseLable('label.change_password'),
         icon: 'pi pi-eye',
         visible: this.checkVisible(this.authUser),

@@ -16,6 +16,7 @@ import { JobDetailComponent } from "./homepage/content/jobs/job-detail/job-detai
 import { JobListComponent } from "./homepage/content/jobs/job-list/job-list.component";
 import { AuthUserComponent } from "./auth-user/auth-user.component";
 import { SignInComponent } from "./sign-in/sign-in.component";
+import { HistoryAppliedComponent } from "./history-applied/history-applied.component";
 
 const routes: Routes = [
     {
@@ -74,6 +75,10 @@ const routes: Routes = [
                     {
                         path: 'profile',
                         component: AuthUserComponent
+                    },
+                    {
+                        path: 'history',
+                        component: HistoryAppliedComponent
                     }
                 ]
             },

@@ -77,7 +77,9 @@
         "result_count_job": "Result ({{number}})",
         "results_count_job": "Results ({{number}})",
         "applied": "Applied",
-        "view_cv": "View cv"
+        "view_cv": "View cv",
+        "jobs_applied": "Jobs applied",
+        "appliedFor_job_on_date": "<b>Applied</b> for <b>{{jobname}}</b> job on <b>{{date}}</b>"
     },
     "message": {
         "sign_up_successfully": "Sign up successfully!",
@@ -114,7 +116,9 @@
         "choose_salary": "Salary",
         "apply_successfully": "Apply successfully!",
         "apply_failed": "Apply failed!",
-        "sign_in_failed": "Sign in failed!"
+        "sign_in_failed": "Sign in failed!",
+        "delete_successfully": "Delete successfully!",
+        "delete_failed": "Delete failed!"
     },
     "button": {
         "sign_in": "Sign in",
