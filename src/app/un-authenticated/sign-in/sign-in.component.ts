@@ -70,6 +70,7 @@ export class SignInComponent implements OnInit{
               } else {
                 AppUtil.getMessageFailed(this.messageService, this.translateService,
                   'message.sign_in_failed');
+                this.authenticateService.clearSession();
                 this.signInForm.reset();
               }
             }
